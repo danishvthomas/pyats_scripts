@@ -1,0 +1,183 @@
+dot1q:
+  R1:				
+	  interfaces:			
+		  GigabitEthernet0/1.12	
+		  GigabitEthernet0/1.13	
+		  GigabitEthernet0/1.14	
+		  GigabitEthernet0/1.15	
+  R2:				
+	  interfaces:			
+		  GigabitEthernet0/1.12	
+	  	GigabitEthernet0/1.13	
+		  GigabitEthernet0/1.14	
+		  GigabitEthernet0/1.15	
+  R3:				
+	  interfaces:			
+		  GigabitEthernet0/1.12	
+		  GigabitEthernet0/1.13	
+		  GigabitEthernet0/1.14	
+	  	GigabitEthernet0/1.15	
+
+  R4:				
+	  interfaces:			
+	  	GigabitEthernet0/1.16	
+		  GigabitEthernet0/1.17	
+	  	GigabitEthernet0/1.18	
+  R5:				
+	  interfaces:			
+		  GigabitEthernet0/1.16	
+		  GigabitEthernet0/1.17	
+		  GigabitEthernet0/1.18	        
+  R6:				
+	  interfaces:			
+		  GigabitEthernet0/1.16	
+		  GigabitEthernet0/1.17	
+		  GigabitEthernet0/1.18	
+
+  R7:				
+	  interfaces:			
+		  GigabitEthernet0/1.19	
+		  GigabitEthernet0/1.20	
+		  GigabitEthernet0/1.21	
+  R8:				
+	  interfaces:			
+		  GigabitEthernet0/1.19	
+		  GigabitEthernet0/1.20	
+		  GigabitEthernet0/1.21	
+  R9:				
+	  interfaces:			
+		  GigabitEthernet0/1.19	
+		  GigabitEthernet0/1.20	
+		  GigabitEthernet0/1.21	
+  R10:				
+	  interfaces:			
+		  GigabitEthernet0/1.22	
+		  GigabitEthernet0/1.23	
+		  GigabitEthernet0/1.24	
+  R11:				
+	  interfaces:			
+		  GigabitEthernet0/1.22	
+		  GigabitEthernet0/1.23	
+		  GigabitEthernet0/1.24	
+ 
+  XR1:				
+	  interfaces:			
+		  GigabitEthernet0/1.25	
+		  GigabitEthernet0/1.26	
+  XR2:				
+	  interfaces:			
+		  GigabitEthernet0/1.25	
+		  GigabitEthernet0/1.26	
+  XR3:				
+	  interfaces:			
+		  GigabitEthernet0/1.25	
+		  GigabitEthernet0/1.26	
+  XR4:				
+	  interfaces:			
+		  GigabitEthernet0/1.25	
+		  GigabitEthernet0/1.26	
+ 
+protocols:
+    ospf:
+        R1:
+          rid: '1.1.1.1'
+          area:
+            12:
+              interfaces:
+                loop0,loop10,GigabitEthernet0/2/1.12,GigabitEthernet0/2/2.12
+              type:
+                standard
+
+        R2:
+          rid: '2.2.2.1'
+          area:
+            12:
+              interfaces:
+                loop0,loop10,GigabitEthernet0/2/1.12,GigabitEthernet0/2/2.12
+              type:
+                standard
+            0:
+              interfaces:
+                GigabitEthernet0/2/1.23
+              type:
+                standard
+        R3:
+          rid: '3.3.3.1'
+          area:
+            0:
+              interfaces:
+                loop0,loop10,GigabitEthernet0/2/1.23,GigabitEthernet0/2/1.34
+              type:
+                standard
+            36:
+              interfaces:
+                GigabitEthernet0/2/1.36
+              type:
+                totalstb    
+            37:
+              interfaces:
+                GigabitEthernet0/2/1.37
+              type:
+                nssa
+        R4:
+          rid: '4.4.4.1'
+          area:
+            0:
+              interfaces:
+                loop0,loop10,GigabitEthernet0/2/1.34
+              type:
+                standard
+            45:
+              interfaces:
+                GigabitEthernet0/2/1.45
+              type:
+                stub
+            48:
+              interfaces:
+                GigabitEthernet0/2/1.48
+              type:
+                standard 
+        R5:
+          rid: '5.5.5.1'
+          area:
+            45:
+              interfaces:
+                loop0,loop10,GigabitEthernet0/2/1.45
+              type:
+                stub
+        R6:
+          rid: '6.6.6.1'
+          area:
+            36:
+              interfaces:
+                loop0,loop10,GigabitEthernet0/1.36
+              type:
+                totalstb    
+        R7:
+          rid: '7.7.7.1'
+          area:
+            37:
+              interfaces:
+                loop0,GigabitEthernet0/2/1.37
+              type:
+                nssa 
+              redistribute:
+                connected nssa-only
+        R8:
+          rid: '8.8.8.1'
+          area:
+            48:
+              interfaces:
+                loop0,GigabitEthernet0/2/1.48
+              type:
+                standard 
+              redistribute:
+                connected
+
+        #    1             0
+        # r1----r2---|-r3-----r4------R5---R9 (stub)
+        #            /  |     |
+        #           /   |     |
+        #          r6   r7   r8-----Ext Redis Loop    
+        #         Ts    |
+        #              NSSOA 

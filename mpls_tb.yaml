@@ -1,0 +1,339 @@
+devices:
+  jumphost:
+    os: linux
+    type: linux
+    connections:
+      cli:
+        protocol: ssh
+        #ip: 172.16.87.128
+        ip: 192.168.0.106
+    credentials:
+        default:                         # login credentials
+            username: admin
+            password: nbv12345
+
+ 
+  CE1:
+    os: iosxe
+    type: router
+    alias: CE1
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+  SP1PE1:
+    os: iosxr
+    type: router
+    alias: SP1PE1
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n1/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+  SP1P1:
+    os: iosxe
+    type: router
+    alias: SP1P1
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3522e7f/n2/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+
+  SP1P2:
+    os: iosxe
+    type: router
+    alias: SP1P2
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3522e7f/n2/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+  SP1PE2:
+    os: iosxr
+    type: router
+    alias: SP1PE2
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n1/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+  CE2:
+    os: iosxe
+    type: router
+    alias: CE2
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+  SP2PE1:
+    os: iosxr
+    type: router
+    alias: SP2PE1
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n1/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+  SP2P1:
+    os: iosxe
+    type: router
+    alias: SP2P1
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3522e7f/n2/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+ 
+
+  SP2PE2:
+    os: iosxr
+    type: router
+    alias: SP2PE2
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n1/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+      
+  SP3PE1:
+    os: iosxe
+    type: router
+    alias: SP3PE1
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n1/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+  SP3PE2:
+    os: iosxe
+    type: router
+    alias: SP3PE2
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n1/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+  SP3PE3:
+    os: iosxr
+    type: router
+    alias: SP3PE3
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n1/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+
+  CE3:
+    os: iosxe
+    type: router
+    alias: CE3
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+ 
+
+  SP3P1:
+    os: iosxe
+    type: router
+    alias: SP3P1
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3522e7f/n2/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+  SP3P2:
+    os: iosxe
+    type: router
+    alias: SP3P2
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3522e7f/n2/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+  SP3P3:
+    os: iosxe
+    type: router
+    alias: SP3P3
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3522e7f/n2/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+  SP3P4:
+    os: iosxe
+    type: router
+    alias: SP3P4
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3522e7f/n2/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+  SP3P5:
+    os: iosxe
+    type: router
+    alias: SP3P5
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3522e7f/n2/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+
+  SP3P6:
+    os: iosxe
+    type: router
+    alias: SP3P6
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3522e7f/n2/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco

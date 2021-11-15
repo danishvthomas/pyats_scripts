@@ -1,0 +1,305 @@
+ethernet:
+  iosvl2-0:
+    interfaces:         
+      GigabitEthernet0/2:
+        type : trunk
+        vlan : 100-110     
+         
+
+  nxos9000-0 :
+    interfaces:          
+      Ethernet1/1:
+        type : l3
+        ip_add : 100.1.1.1 255.255.255.0
+      Ethernet1/2:
+        type : trunk
+        vlan : 100-110    
+
+  nxos9000-1:
+    interfaces:          
+      Ethernet1/2:
+        type : l3
+        ip_add : 100.2.1.1 255.255.255.0
+      Ethernet1/5:
+        type : l3
+        ip_add : 15.15.1.1 255.255.255.0 
+
+  nxos9000-2:
+    interfaces:          
+      Ethernet1/1:
+        type : l3
+        ip_add : 150.1.1.1 255.255.255.0   
+      Ethernet1/5:
+        type : l3
+        ip_add : 15.15.1.2 255.255.255.0  
+
+  nxos9000-3:
+    interfaces:          
+      Ethernet1/2:
+        type : l3
+        ip_add : 150.2.1.1 255.255.255.0 
+      Ethernet1/1:
+        type : trunk
+        vlan : 100-110   
+
+  iosvl2-1:
+    interfaces:         
+      GigabitEthernet0/1:
+        type : trunk
+        vlan : 100-110   
+
+  iosv-0:
+    interfaces:          
+      GigabitEthernet0/1:
+        type : l3
+        ip_add : 100.1.1.2 255.255.255.0 
+      GigabitEthernet0/2:
+        type : l3
+        ip_add : 100.2.1.2 255.255.255.0 
+  iosv-1:
+    interfaces:          
+      GigabitEthernet0/1:
+        type : l3
+        ip_add : 150.1.1.2 255.255.255.0 
+      GigabitEthernet0/2:
+        type : l3
+        ip_add : 150.2.1.2 255.255.255.0      
+ 
+protocols:
+    ospf:
+        iosv-0:
+          rid: '1.1.1.1'
+          area:
+            2:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0.100,GigabitEthernet0/0.101]    
+              type:
+                standard
+
+        iosv-1:
+          rid: '2.2.2.1'
+          area:
+            2:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0.100,GigabitEthernet0/0.101]   
+              type:
+                standard
+ 
+        iosv-2:
+          rid: '3.3.3.1'
+          area:
+            2:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0.100,GigabitEthernet0/0.101]   
+              type:
+                standard
+            0:
+              interfaces: 
+                [GigabitEthernet0/0.10,GigabitEthernet0/0.11]   
+              type:
+                standard
+        iosv-3:
+          rid: '4.4.4.1'
+          area:
+            0:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0.110,GigabitEthernet0/0.111,GigabitEthernet0/0.10,GigabitEthernet0/0.11]  
+              type:
+                standard
+
+        iosv-4:
+          rid: '5.5.5.1'
+          area:
+            0:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0.110,GigabitEthernet0/0.111]   
+              type:
+                standard
+ 
+        iosv-5:
+          rid: '6.6.6.1'
+          area:
+            0:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0.110,GigabitEthernet0/0.111]   
+              type:
+                standard
+            3:
+              interfaces: 
+                [GigabitEthernet0/0.20,GigabitEthernet0/0.21]   
+              type:
+                standard
+        xrv-0:
+          rid: '7.7.7.1'
+          area:
+            3:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0/0/0.120,GigabitEthernet0/0/0/0.121,GigabitEthernet0/0/0/0.20,GigabitEthernet0/0/0/0.21]
+              type:
+                standard
+
+        xrv-1:
+          rid: '8.8.8.1'
+          area:
+            3:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0/0/0.120,GigabitEthernet0/0/0/0.121]   
+              type:
+                standard
+ 
+        xrv-2:
+          rid: '9.9.9.1'
+          area:
+            3:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0/0/0.120,GigabitEthernet0/0/0/0.121,GigabitEthernet0/0/0/0.30,GigabitEthernet0/0/0/0.31]   
+              type:
+                standard
+
+        xrv-6:
+          rid: '13.13.13.1'
+          area:
+            3:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0/0/0.120,GigabitEthernet0/0/0/0.151]
+              type:
+                standard
+
+        xrv-7:
+          rid: '14.14.14.1'
+          area:
+            3:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0/0/0.150,GigabitEthernet0/0/0/0.151]   
+              type:
+                standard
+ 
+        xrv-8:
+          rid: '15.15.15.1'
+          area:
+            3:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0/0/0.150,GigabitEthernet0/0/0/0.151]   
+              type:
+                standard
+
+
+    isis:
+        xrv-2:
+          net: '1239.0000.0000.0004.00'
+          interfaces: 
+            [GigabitEthernet0/0/0/0.30,GigabitEthernet0/0/0/0.31]    
+          type:
+            level-2
+          redistribute:
+            ospf
+              
+        xrv-3:
+          net: '1240.0000.0000.0005.00'
+          interfaces: 
+            [loop0,loop10,GigabitEthernet0/0/0/0.130,GigabitEthernet0/0/0/0.131,GigabitEthernet0/0/0/0.30,GigabitEthernet0/0/0/0.31]    
+          type:
+            level-2
+        xrv-4:
+          net: '1241.0000.0000.0006.00'
+          interfaces: 
+            [loop0,loop10,GigabitEthernet0/0/0/0.130,GigabitEthernet0/0/0/0.131]    
+          type:
+            level-2             
+        xrv-5:
+          net: '1242.0000.0000.0007.00'
+          interfaces: 
+            [loop0,loop10,GigabitEthernet0/0/0/0.130,GigabitEthernet0/0/0/0.131]    
+          type:
+            level-2
+    bgp:
+        nxos9000-0 :
+          as: 
+            100
+          networks: 
+            [loopback]    
+          neighbor:
+            2.2.2.1
+          remote-as:
+            100
+          rid:
+            1.1.1.1
+        nxos9000-1 :
+          as: 
+            100
+          networks: 
+            [loopback]    
+          neighbor:
+            1.1.1.1
+          remote-as:
+            100
+          rid:
+            2.2.2.1
+              
+        nxos9000-2 :
+          as: 
+            200
+          networks: 
+            [loopback]    
+          neighbor:
+            4.4.4.1
+          remote-as:
+            200
+          rid:
+            3.3.3.1
+        nxos9000-3 :
+          as: 
+            200
+          networks: 
+            [loopback]    
+          neighbor:
+            3.3.3.1
+          remote-as:
+            200
+          rid:
+            4.4.4.1
+    pim:
+        nxos9000-0 :
+          rp_add: 
+            5.5.5.1
+        nxos9000-1 :
+          rp_add: 
+            5.5.5.1
+        nxos9000-2 :
+          rp_add: 
+            6.6.6.1
+        nxos9000-3 :
+          rp_add: 
+            6.6.6.1
+ 
+        iosv-0:
+          rp_add: 
+            5.5.5.1
+ 
+        iosv-1:
+          rp_add: 
+            6.6.6.1
+    ebgp:
+        nxos9000-1 :
+          as: 
+            100
+          networks: 
+            [loopback]    
+          neighbor:
+            15.15.1.2
+          remote-as:
+            200
+          update-source:
+            Ethernet1/5
+              
+        nxos9000-2 :
+          as: 
+            200
+          networks: 
+            [loopback]    
+          neighbor:
+            15.15.1.1
+          remote-as:
+            100
+          update-source:
+            Ethernet1/5

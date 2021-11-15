@@ -1,0 +1,69 @@
+dot1q:
+  iosv-0:
+	  interfaces:			
+		  GigabitEthernet0/0.100	
+		  GigabitEthernet0/0.101	
+
+  iosv-1:
+	  interfaces:			
+		  GigabitEthernet0/0.100	
+		  GigabitEthernet0/0.101	
+
+  iosv-2:
+	  interfaces:			
+		  GigabitEthernet0/0.100	
+		  GigabitEthernet0/0.101	
+		  GigabitEthernet0/0.10	
+		  GigabitEthernet0/0.11	
+
+  iosv-3:
+	  interfaces:			
+		  GigabitEthernet0/0.110	
+		  GigabitEthernet0/0.111	
+		  GigabitEthernet0/0.10	
+		  GigabitEthernet0/0.11	
+
+  iosv-4:
+	  interfaces:			
+		  GigabitEthernet0/0.110	
+		  GigabitEthernet0/0.111	
+
+  iosv-5:
+	  interfaces:			
+		  GigabitEthernet0/0.110	
+		  GigabitEthernet0/0.111	
+ 
+  xrv-0:
+	  interfaces:			
+		  GigabitEthernet0/0/0/0.120	
+		  GigabitEthernet0/0/0/0.111	
+		  GigabitEthernet0/0/0/0.10	
+		  GigabitEthernet0/0/0/0.11	
+
+  xrv-1:
+	  interfaces:			
+		  GigabitEthernet0/0/0/0.120	
+		  GigabitEthernet0/0/0/0.111	
+ 
+  xrv-2:
+	  interfaces:			
+		  GigabitEthernet0/0/0/0.120	
+		  GigabitEthernet0/0/0/0.111	
+		  GigabitEthernet0/0/0/0.20	
+		  GigabitEthernet0/0/0/0.21	
+
+  xrv-3:
+	  interfaces:			
+		  GigabitEthernet0/0/0/0.130	
+		  GigabitEthernet0/0/0/0.131	
+		  GigabitEthernet0/0/0/0.20	
+		  GigabitEthernet0/0/0/0.21	
+  xrv-4:
+	  interfaces:			
+		  GigabitEthernet0/0/0/0.130	
+		  GigabitEthernet0/0/0/0.131	
+
+  xrv-5:
+	  interfaces:			
+		  GigabitEthernet0/0/0/0.130	
+		  GigabitEthernet0/0/0/0.131	

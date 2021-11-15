@@ -1,0 +1,284 @@
+#n0        0,1             core1xe              unifiedMPLS
+#n1      0,1,2              abr2xr              unifiedMPLS
+ 
+#n2      0,1,2              abr1xr              unifiedMPLS
+#n3        0,1              abr3xe              unifiedMPLS
+#n4        0,1             agg2xe              unifiedMPLS
+#n5      0,1,2             agg1xr              unifiedMPLS
+#n6        0,1             agg3xe              unifiedMPLS
+#n7      0,1,2               pe2xr              unifiedMPLS
+#n8      0,1,2               pe1xr              unifiedMPLS
+#n9        0,1               pe3xe              unifiedMPLS
+
+devices:
+  jumphost:
+    os: linux
+    type: linux
+    connections:
+      cli:
+        protocol: ssh
+        #ip: 172.16.87.128
+        ip: 192.168.0.57
+    credentials:
+        default:                         # login credentials
+            username: admin
+            password: nbv12345
+
+  p1xe:
+    os: iosxe
+    type: router
+    alias: p1
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  p2xe:
+    os: iosxe
+    type: router
+    alias: p2
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+  p3xe:
+    os: iosxe
+    type: router
+    alias: p3
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+
+  ce1:
+    os: iosxe
+    type: router
+    alias: ce1
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  ce2:
+    os: iosxe
+    type: router
+    alias: ce2
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+  ce3:
+    os: iosxe
+    type: router
+    alias: ce3
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  core1xe:
+    os: iosxe
+    type: router
+    alias: core1xe
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  abr1xr:
+    os: iosxr
+    type: router
+    alias: abr1xr
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  abr2xr:
+    os: iosxr
+    type: router
+    alias: abr2xr
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+  abr3xe:
+    os: iosxe
+    type: router
+    alias: abr3xe
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  agg1xr:
+    os: iosxr
+    type: router
+    alias: agg1xr
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+  agg2xe:
+    os: iosxe
+    type: router
+    alias:  agg2xe
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  agg3xe:
+    os: iosxe
+    type: router
+    alias:  agg3xe
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+  pe1xr:
+    os: iosxr
+    type: router
+    alias:  pe1xr
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+  pe2xr:
+    os: iosxr
+    type: router
+    alias:  pe2xr
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+  pe3xe:
+    os: iosxe
+    type: router
+    alias:  pe3xe
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /unifiedMPLS/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco
+   

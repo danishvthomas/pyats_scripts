@@ -1,0 +1,201 @@
+
+2021-01-22 12:57:21,819: %UNICON-INFO: +++ R8: executing command 'show logg' +++
+show logg
+Syslog logging: enabled (0 messages dropped, 3 messages rate-limited, 0 flushes, 0 overruns, xml disabled, filtering disabled)
+
+No Active Message Discriminator.
+
+
+
+No Inactive Message Discriminator.
+
+
+    Console logging: disabled
+    Monitor logging: level debugging, 0 messages logged, xml disabled,
+                     filtering disabled
+    Buffer logging:  level debugging, 44 messages logged, xml disabled,
+                    filtering disabled
+    Exception Logging: size (8192 bytes)
+    Count and timestamp logging messages: disabled
+    Persistent logging: disabled
+
+No active filter modules.
+
+    Trap logging: level informational, 48 message lines logged
+        Logging Source-Interface:       VRF Name:
+
+Log Buffer (8192 bytes):
+
+*Mar  1 00:00:01.155: %VIRTIO-3-INIT_FAIL: Failed to initialize device, PCI 0/7/0/1002 , device is disabled, not supported
+*Mar  1 00:00:01.157: %VIRTIO-3-INIT_FAIL: Failed to initialize device, PCI 0/8/0/1005 , device is disabled, not supported
+*Mar  1 00:00:01.355: %ATA-6-DEV_FOUND: device 0x1F0
+*Mar  1 00:00:04.276: %ATA-6-DEV_FOUND: device 0x1F1
+*Mar  1 00:00:08.149: %NVRAM-5-CONFIG_NVRAM_READ_OK: NVRAM configuration 'flash:/nvram' was read from disk.
+*Jan 22 04:58:44.865: %C3600-3-NOMAC: Can't allocate MAC address for interface 0/0
+*Jan 22 04:58:45.043: %C3600-3-NOMAC: Can't allocate MAC address for interface 0/0
+*Jan 22 04:58:47.235: %C3600-3-NOMAC: Can't allocate MAC address for interface 0/0
+*Jan 22 04:58:54.731: %PA-3-PA_INIT_FAILED: Performance Agent failed to initialize (Missing Data License)
+*Jan 22 04:59:00.981: %PNP-6-PNP_DISCOVERY_STARTED: PnP Discovery started
+*Jan 22 04:59:01.052: %LINK-3-UPDOWN: Interface GigabitEthernet0/0, changed state to up
+*Jan 22 04:59:01.056: %LINK-3-UPDOWN: Interface GigabitEthernet0/1, changed state to up
+*Jan 22 04:59:01.058: %LINK-3-UPDOWN: Interface GigabitEthernet0/2, changed state to up
+*Jan 22 04:59:03.216: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
+*Jan 22 04:59:03.218: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to up
+*Jan 22 04:59:03.219: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/2, changed state to up
+*Jan 22 04:59:03.822: %SYS-5-CONFIG_I: Configured from memory by console
+*Jan 22 04:59:05.527: %LINK-5-CHANGED: Interface GigabitEthernet0/0, changed state to administratively down
+*Jan 22 04:59:05.749: %LINK-5-CHANGED: Interface GigabitEthernet0/1, changed state to administratively down
+*Jan 22 04:59:05.751: %LINK-5-CHANGED: Interface GigabitEthernet0/2, changed state to administratively down
+*Jan 22 04:59:06.295: %SYS-5-RESTART: System restarted --
+Cisco IOS Software, IOSv Software (VIOS-ADVENTERPRISEK9-M), Version 15.9(3)M2, RELEASE SOFTWARE (fc1)
+Technical Support: http://www.cisco.com/techsupport
+Copyright (c) 1986-2020 by Cisco Systems, Inc.
+Compiled Tue 28-Jul-20 07:09 by prod_rel_team
+*Jan 22 04:59:06.307: %CVAC-4-FILE_IGNORED: Configuration file flash0:/ios_config.txt is ignored : empty file
+*Jan 22 04:59:06.564: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to down
+*Jan 22 04:59:06.597: %CVAC-4-FILE_IGNORED: Configuration file flash2:/ios_config.txt is ignored : empty file
+*Jan 22 04:59:06.612: %CRYPTO-6-ISAKMP_ON_OFF: ISAKMP is OFF
+*Jan 22 04:59:06.612: %CRYPTO-6-GDOI_ON_OFF: GDOI is OFF
+*Jan 22 04:59:07.055: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/1, changed state to down
+*Jan 22 04:59:07.055: %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/2, changed state to down
+*Jan 22 04:59:12.147: %PNP-6-PNP_BEST_UDI_UPDATE: Best UDI [PID:IOSv,VID:1.0,SN:957IIZC8LFP8USKGFPCV5] identified via (entity-mibs)
+*Jan 22 04:59:12.148: %PNP-6-PNP_CDP_UPDATE: Device UDI [PID:IOSv,VID:1.0,SN:957IIZC8LFP8USKGFPCV5] identified for CDP
+*Jan 22 04:59:12.151: %PNP-6-PNP_DISCOVERY_STOPPED: PnP Discovery stopped (Startup Config Present)
+*Jan 22 04:59:17.408: %SYS-3-CPUHOG: Task is running for (1997)msecs, more than (2000)msecs (0/0),process = Crypto CA.
+*Jan 22 05:00:08.593: %PLATFORM-5-SIGNATURE_VERIFIED: Image 'flash0:/vios-adventerprisek9-m' passed code signing verification
+*Jan 22 06:47:09.580: %GRUB-5-CONFIG_WRITING: GRUB configuration is being updated on disk. Please wait...
+*Jan 22 06:47:10.755: %GRUB-5-CONFIG_WRITTEN: GRUB configuration was written to disk successfully.
+*Jan 22 06:57:11.715: %SYS-5-CONFIG_I: Configured from console by console
+*Jan 22 07:02:30.946: %SYS-5-LOG_CONFIG_CHANGE: Console logging disabled
+*Jan 22 07:02:31.459: %SYS-5-CONFIG_I: Configured from console by console
+*Jan 22 07:07:38.771: %SYS-5-CONFIG_I: Configured from console by console
+*Jan 22 07:15:12.039: %SYS-5-CONFIG_I: Configured from console by console
+*Jan 22 07:16:48.754: %SYS-5-CONFIG_I: Configured from console by console
+*Jan 22 07:18:15.252: %SYS-5-CONFIG_I: Configured from console by console
+*Jan 22 07:21:03.139: %SYS-5-CONFIG_I: Configured from console by console
+*Jan 22 07:26:57.002: %SYS-5-CONFIG_I: Configured from console by console
+R8#
+
+2021-01-22 12:57:29,938: %UNICON-INFO: +++ XR2: executing command 'show logg' +++
+show logg
+Fri Jan 22 07:27:29.807 UTC
+Syslog logging: enabled (0 messages dropped, 0 flushes, 0 overruns)
+    Console logging: Disabled
+    Monitor logging: level debugging, 0 messages logged
+    Trap logging: level informational, 0 messages logged
+    Buffer logging: level debugging, 111 messages logged
+
+Log Buffer (2097152 bytes):
+
+RP/0/0/CPU0:Jan 22 05:00:56.509 : init[65549]: %OS-INIT-7-MBI_STARTED : total time 1.779 seconds 
+RP/0/0/CPU0:Jan 22 05:01:43.326 : sysmgr[75]: %OS-SYSMGR-5-NOTICE : Card is COLD started  
+RP/0/0/CPU0:Jan 22 05:01:50.656 : init[65549]: %OS-INIT-7-INSTALL_READY : total time 55.926 seconds 
+RP/0/0/CPU0:Jan 22 05:01:51.426 : sysmgr[393]: %OS-SYSMGR-6-INFO : Backup system manager is ready  
+RP/0/0/CPU0:Jan 22 05:01:57.085 : arbmgr[50]: %OS-ARBMGR-7-UNEXPECTED : Unexpected: arb_num_ungraceful_resets: nvraw lcl open failed: 0x2 
+RP/0/0/CPU0:Jan 22 05:02:07.445 : dsc[177]: %PLATFORM-DSC-6-INFO_I_AM_DSC : Setting myself as DSC 
+RP/0/0/CPU0:Jan 22 05:02:07.455 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : node set to DSC  
+RP/0/0/CPU0:Jan 22 05:02:09.044 : platform_packet_partner[342]: Pariticle/SPP region b0000000 .. b4000000, size 64Mb
+RP/0/0/CPU0:Jan 22 05:02:09.134 : platform_packet_partner[342]: Buffman       region b4000000 .. b8000000, size 64Mb
+RP/0/0/CPU0:Jan 22 05:02:09.134 : platform_packet_partner[342]: Shared memory region a0000000 .. b0000000, size 256Mb
+RP/0/0/CPU0:Jan 22 05:02:09.134 : platform_packet_partner[342]: Pakman memory region bbfe0000 .. bdfe0000, size 32Mb (8 scale)
+RP/0/0/CPU0:Jan 22 05:02:11.034 : platform_packet_partner[342]: Creating 16000 particle of size 256
+RP/0/0/CPU0:Jan 22 05:02:11.034 : platform_packet_partner[342]: Creating 8000 particle of size 512
+RP/0/0/CPU0:Jan 22 05:02:11.034 : platform_packet_partner[342]: Creating 4000 particle of size 768
+RP/0/0/CPU0:Jan 22 05:02:11.034 : platform_packet_partner[342]: Creating 2000 particle of size 1648
+RP/0/0/CPU0:Jan 22 05:02:11.034 : platform_packet_partner[342]: Creating 800 particle of size 4608
+RP/0/0/CPU0:Jan 22 05:02:11.034 : platform_packet_partner[342]: Creating 240 particle of size 6240
+RP/0/0/CPU0:Jan 22 05:02:11.034 : platform_packet_partner[342]: Creating 400 particle of size 512
+RP/0/0/CPU0:Jan 22 05:02:18.114 : instdir[233]: ISM registered for shelfmgr node state ENS notifications.
+RP/0/0/CPU0:Jan 22 05:02:25.323 : instdir[233]: DLL MAIN Attach process sam_client_api
+RP/0/0/CPU0:Jan 22 05:02:25.483 : sam_server[363]: %SECURITY-SAM-4-WARNING : Failed to initialize nvram digest 
+RP/0/0/CPU0:Jan 22 05:02:28.823 : invmgr[236]: %PLATFORM-INVMGR-6-NODE_STATE_CHANGE : Node: 0/0/CPU0, state: IOS XR RUN  
+RP/0/0/CPU0:Jan 22 05:02:28.883 : licmgr[288]: SMART_LIC-6-AGENT_READY:Smart Agent for Licensing is initialized 
+RP/0/0/CPU0:Jan 22 05:04:08.846 : sysmgr[75]: %OS-SYSMGR-3-ERROR : dumper(1) (jid 54) exited, will be respawned with a delay (slow-restart)   
+RP/0/0/CPU0:Jan 22 05:04:08.846 : sysmgr[75]: %OS-SYSMGR-3-ERROR : dumper(54) (fail count 1) will be respawned in 10 seconds  
+RP/0/0/CPU0:Jan 22 05:04:08.896 : sysmgr[75]: %OS-SYSMGR-3-ERROR : dllmgr(1) (jid 53) exited, will be respawned with a delay (slow-restart)   
+RP/0/0/CPU0:Jan 22 05:04:08.896 : sysmgr[75]: %OS-SYSMGR-3-ERROR : dllmgr(53) (fail count 1) will be respawned in 10 seconds  
+RP/0/0/CPU0:Jan 22 05:04:08.846 : sysmgr[75]: dumper(1) (jid 54) (pid 237593) (fail_count 1) abnormally terminated, restart scheduled 
+RP/0/0/CPU0:Jan 22 05:04:08.896 : sysmgr[75]: dllmgr(1) (jid 53) (pid 213004) (fail_count 1) abnormally terminated, restart scheduled 
+RP/0/0/CPU0:Jan 22 05:05:24.681 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ifmgr(1) (jid 228) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:25.001 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : netio(1) (jid 314) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:25.811 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : lpts_pa(1) (jid 295) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:26.811 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : nd_partner(1) (jid 313) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:27.241 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : nsr_ping_reply(1) (jid 320) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:28.531 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : rsi_agent(1) (jid 361) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:28.591 : /pkg/sbin/sysmgr_log[65666]: %OS-SYSMGR-7-CHECK_LOG : /pkg/bin/sysmgr_debug_script invoked for: (rsi_agent) process did not signal EOI and for level:100 . Output is in harddisk:/sysmgr_debug/debug.node0_0_CPU0.643108 
+RP/0/0/CPU0:Jan 22 05:05:29.771 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : aib(1) (jid 111) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:30.171 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : statsd_server(1) (jid 379) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:30.861 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ipv4_acl_mgr(1) (jid 265) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:31.061 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ipv6_acl_daemon(1) (jid 271) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:31.921 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ipv6_mfwd_partner(1) (jid 277) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:32.171 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : pifibm_server_rp(1) (jid 335) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:33.051 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ipv4_ma(1) (jid 268) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:33.520 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ipv6_nd(1) (jid 278) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:33.850 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : Feature:policymgr_rp policymgr_rp[347] (pid 340096) has not sent proc-ready within 90 seconds  
+RP/0/0/CPU0:Jan 22 05:05:35.630 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : fib_mgr(1) (jid 211) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:35.770 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : Feature:ipv6_ea ipv6_ea[274] (pid 409733) has not sent proc-ready within 90 seconds  
+RP/0/0/CPU0:Jan 22 05:05:36.360 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : Feature:ipv6_ma ipv6_ma[276] (pid 426120) has not sent proc-ready within 90 seconds  
+RP/0/0/CPU0:Jan 22 05:05:36.770 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : mpls_lsd(1) (jid 310) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:36.980 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : bgp_policy_reg_agent(1) (jid 142) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.030 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : eigrp_policy_reg_agent(1) (jid 196) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.080 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : igmp_policy_reg_agent(1) (jid 229) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.170 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : isis_policy_reg_agent(1) (jid 279) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.280 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : l2vpn_policy_reg_agent(1) (jid 285) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.350 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : lisp_xr_policy_reg_agent(1) (jid 289) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.460 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : mldp_policy_reg_agent(1) (jid 306) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.540 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ospf_policy_reg_agent(1) (jid 325) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.670 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : bcdl_agent(1) (jid 119) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.700 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ospfv3_policy_reg_agent(1) (jid 326) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.750 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : pim6_policy_reg_agent(1) (jid 337) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.800 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : pim_policy_reg_agent(1) (jid 339) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.840 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : rip_policy_reg_agent(1) (jid 357) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.850 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : debug_d(1) (jid 173) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.850 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ether_driver_100ge(1) (jid 202) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.850 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ether_driver_10ge(1) (jid 203) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.860 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ether_driver_40ge(1) (jid 204) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.860 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ether_driver_faste(1) (jid 205) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.870 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ether_driver_gige(1) (jid 206) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.870 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : ether_driver_mgmte(1) (jid 207) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.920 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : redfs_config(1) (jid 354) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:37.920 : sysmgr[75]: %OS-SYSMGR-7-DEBUG : timezone_notify(1) (jid 316) did not signal end of initialization   
+RP/0/0/CPU0:Jan 22 05:05:38.100 : /pkg/sbin/sysmgr_log[65668]: %OS-SYSMGR-7-CHECK_LOG : /pkg/bin/sysmgr_debug_script invoked by () for pid (). Output is in harddisk:/sysmgr_debug/debug..823332 
+RP/0/0/CPU0:Jan 22 05:05:41.070 : mpls_fwd_show_proxy[307]: %ROUTING-MPLS_FWD-3-ERR_GENERAL : IMC bind failed: 'ifmgr' detected the 'warning' condition 'Failed to contact the server'  : pkg/bin/mpls_fwd_show_proxy : (PID=868517) :  -Traceback= 420679b 420007b 4200214 4200054
+RP/0/0/CPU0:Jan 22 05:05:41.140 : sysmgr[75]: %OS-SYSMGR-3-ERROR : mpls_fwd_show_proxy(1) (jid 307) exited, will be respawned with a delay (slow-restart)   
+RP/0/0/CPU0:Jan 22 05:05:41.140 : sysmgr[75]: %OS-SYSMGR-3-ERROR : mpls_fwd_show_proxy(307) (fail count 1) will be respawned in 10 seconds  
+RP/0/0/CPU0:Jan 22 05:05:41.140 : sysmgr[75]: mpls_fwd_show_proxy(1) (jid 307) (pid 868517) (fail_count 1) abnormally terminated, restart scheduled 
+RP/0/0/CPU0:Jan 22 05:05:51.819 : mpls_fwd_show_proxy[307]: %ROUTING-MPLS_FWD-3-ERR_GENERAL : IMC bind failed: 'ifmgr' detected the 'warning' condition 'Failed to contact the server'  : pkg/bin/mpls_fwd_show_proxy : (PID=1130710) :  -Traceback= 420679b 420007b 4200214 4200054
+RP/0/0/CPU0:Jan 22 05:05:51.879 : sysmgr[75]: %OS-SYSMGR-3-ERROR : mpls_fwd_show_proxy(1) (jid 307) exited, will be respawned with a delay (slow-restart)   
+RP/0/0/CPU0:Jan 22 05:05:51.889 : sysmgr[75]: %OS-SYSMGR-3-ERROR : mpls_fwd_show_proxy(307) (fail count 2) will be respawned in 10 seconds  
+RP/0/0/CPU0:Jan 22 05:05:51.909 : ipsec_mp[232]: %SECURITY-IMP-6-PROC_READY : Process ipsec_mp is ready 
+RP/0/0/CPU0:Jan 22 05:05:51.879 : sysmgr[75]: mpls_fwd_show_proxy(1) (jid 307) (pid 1130710) (fail_count 2) abnormally terminated, restart scheduled 
+RP/0/0/CPU0:Jan 22 05:06:01.959 : mpls_fwd_show_proxy[307]: %ROUTING-MPLS_FWD-3-ERR_GENERAL : IMC bind failed: 'ifmgr' detected the 'warning' condition 'Failed to contact the server'  : pkg/bin/mpls_fwd_show_proxy : (PID=1204260) :  -Traceback= 420679b 420007b 4200214 4200054
+RP/0/0/CPU0:Jan 22 05:06:01.989 : sysmgr[75]: %OS-SYSMGR-3-ERROR : mpls_fwd_show_proxy(1) (jid 307) exited, will be respawned with a delay (slow-restart)   
+RP/0/0/CPU0:Jan 22 05:06:01.989 : sysmgr[75]: %OS-SYSMGR-3-ERROR : mpls_fwd_show_proxy(307) (fail count 3) will be respawned in 10 seconds  
+RP/0/0/CPU0:Jan 22 05:06:01.989 : sysmgr[75]: mpls_fwd_show_proxy(1) (jid 307) (pid 1204260) (fail_count 3) abnormally terminated, restart scheduled 
+RP/0/0/CPU0:Jan 22 05:06:10.078 : insthelper[55]: DLL MAIN Attach process sam_client_api
+RP/0/0/CPU0:Jan 22 05:06:10.278 : sam_server[363]: %SECURITY-SAM-4-WARNING : Failed to initialize nvram digest 
+RP/0/0/CPU0:Jan 22 05:07:05.374 : ifmgr[228]: %PKT_INFRA-LINK-5-CHANGED : Interface MgmtEth0/0/CPU0/0, changed state to Administratively Down 
+RP/0/0/CPU0:Jan 22 05:07:05.374 : cfgmgr-rp[155]: %MGBL-CONFIG-6-OIR_RESTORE : Configuration for node '0/0/0' has been restored. 
+RP/0/0/CPU0:Jan 22 05:07:05.904 : ifmgr[228]: %PKT_INFRA-LINK-3-UPDOWN : Interface GigabitEthernet0/0/0/0, changed state to Down 
+RP/0/0/CPU0:Jan 22 05:07:05.904 : ifmgr[228]: %PKT_INFRA-LINEPROTO-5-UPDOWN : Line protocol on Interface GigabitEthernet0/0/0/0, changed state to Down 
+RP/0/0/CPU0:Jan 22 05:07:05.904 : ifmgr[228]: %PKT_INFRA-LINK-5-CHANGED : Interface GigabitEthernet0/0/0/1, changed state to Administratively Down 
+RP/0/0/CPU0:Jan 22 05:07:05.944 : ifmgr[228]: %PKT_INFRA-LINK-3-UPDOWN : Interface GigabitEthernet0/0/0/0, changed state to Up 
+RP/0/0/CPU0:Jan 22 05:07:05.944 : ifmgr[228]: %PKT_INFRA-LINEPROTO-5-UPDOWN : Line protocol on Interface GigabitEthernet0/0/0/0, changed state to Up 
+RP/0/0/CPU0:Jan 22 05:07:06.844 : cvac[171]: %MGBL-CVAC-4-FILE_IGNORED : Configuration file /cd0/iosxr_config_admin.txt was ignored: Checksum unchanged since last applied 
+RP/0/0/CPU0:Jan 22 05:07:06.864 : cvac[171]: %MGBL-CVAC-4-FILE_IGNORED : Configuration file /cd0/iosxr_config.txt was ignored: Checksum unchanged since last applied 
+RP/0/0/CPU0:Jan 22 06:48:51.686 : exec[65748]: %SECURITY-LOGIN-6-AUTHEN_SUCCESS : Successfully authenticated user 'cisco' from 'console' on 'con0_0_CPU0' 
+RP/0/0/CPU0:Jan 22 06:58:53.875 : exec[65748]: %SECURITY-LOGIN-6-CLOSE : User 'cisco' logged out 
+RP/0/0/CPU0:Jan 22 07:08:56.653 : exec[65748]: %SECURITY-LOGIN-6-AUTHEN_SUCCESS : Successfully authenticated user 'cisco' from 'console' on 'con0_0_CPU0' 
+RP/0/0/CPU0:Jan 22 07:09:00.243 : config[65823]: %MGBL-CONFIG-6-DB_COMMIT : Configuration committed by user 'cisco'. Use 'show configuration commit changes 1000000003' to view the changes. 
+RP/0/0/CPU0:Jan 22 07:09:00.293 : config[65823]: %MGBL-SYS-5-CONFIG_I : Configured from console by cisco 
+RP/0/0/CPU0:Jan 22 07:15:36.446 : config[65823]: %MGBL-CONFIG-6-DB_COMMIT : Configuration committed by user 'cisco'. Use 'show configuration commit changes 1000000004' to view the changes. 
+RP/0/0/CPU0:Jan 22 07:15:36.556 : config[65823]: %MGBL-SYS-5-CONFIG_I : Configured from console by cisco 
+RP/0/0/CPU0:Jan 22 07:17:11.919 : config[65823]: %MGBL-CONFIG-6-DB_COMMIT : Configuration committed by user 'cisco'. Use 'show configuration commit changes 1000000005' to view the changes. 
+RP/0/0/CPU0:Jan 22 07:17:11.999 : config[65823]: %MGBL-SYS-5-CONFIG_I : Configured from console by cisco 
+RP/0/0/CPU0:Jan 22 07:18:38.363 : config[65823]: %MGBL-CONFIG-6-DB_COMMIT : Configuration committed by user 'cisco'. Use 'show configuration commit changes 1000000006' to view the changes. 
+RP/0/0/CPU0:Jan 22 07:18:38.423 : config[65823]: %MGBL-SYS-5-CONFIG_I : Configured from console by cisco 
+RP/0/0/CPU0:Jan 22 07:21:27.482 : config[65823]: %MGBL-CONFIG-6-DB_COMMIT : Configuration committed by user 'cisco'. Use 'show configuration commit changes 1000000007' to view the changes. 
+RP/0/0/CPU0:Jan 22 07:21:27.562 : config[65823]: %MGBL-SYS-5-CONFIG_I : Configured from console by cisco 
+RP/0/0/CPU0:Jan 22 07:27:21.158 : config[65823]: %MGBL-CONFIG-6-DB_COMMIT : Configuration committed by user 'cisco'. Use 'show configuration commit changes 1000000008' to view the changes. 
+RP/0/0/CPU0:Jan 22 07:27:21.218 : config[65823]: %MGBL-SYS-5-CONFIG_I : Configured from console by cisco 
+RP/0/0/CPU0:XR2#

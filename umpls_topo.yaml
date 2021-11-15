@@ -1,0 +1,577 @@
+ethernet:
+  ce1:
+    interfaces:         
+      Loopback0:
+        type : l3
+        ip_add : 199.1.1.1 255.255.255.255
+        ipv6_add : 2001:199:199:11:11::11/128
+ 
+      GigabitEthernet0/0.111:
+        description : pe1xr1
+        type : l3
+        ip_add : 11.1.1.10 255.255.255.0  
+
+      GigabitEthernet0/0.111:
+        description : pe1xr1
+        type : l3
+        ip_add : 11.1.1.10 255.255.255.0  
+
+      GigabitEthernet0/0.112:
+        description : pe1xr2
+        type : l3
+        ip_add : 11.2.1.10 255.255.255.0          
+
+  ce2:
+    interfaces:         
+      Loopback0:
+        type : l3
+        ip_add : 199.1.1.2 255.255.255.255
+        ipv6_add : 2001:199:199:11:11::22/128
+
+      GigabitEthernet0/0.221:
+        description : pe2xr1
+        type : l3
+        ip_add : 22.1.1.10 255.255.255.0  
+
+      GigabitEthernet0/0.222:
+        description : pe2xr2
+        type : l3
+        ip_add : 22.2.1.10 255.255.255.0   
+
+  ce3:
+    interfaces:         
+      Loopback0:
+        type : l3
+        ip_add : 199.1.1.3 255.255.255.255
+        ipv6_add : 2001:199:199:11:11::33/128
+
+      GigabitEthernet0/0.331:
+        description : pe3xe1
+        type : l3
+        ip_add : 33.1.1.10 255.255.255.0  
+
+      GigabitEthernet0/0.332:
+        description : pe2xe3
+        type : l3
+        ip_add : 33.2.1.10 255.255.255.0   
+
+  pe1xr:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 1.1.1.1 255.255.255.255
+        ipv6_add : 2001:1:1:1:1::1/128
+
+      Loopback1:
+        type : l3
+        ip_add : 1.1.1.11 255.255.255.255
+        ipv6_add : 2001:1:1:1:1::11/128
+
+
+      GigabitEthernet0/0/0/0.111:
+        description : ce11
+        type : l3
+        ip_add : 11.1.1.50 255.255.255.0  
+
+      GigabitEthernet0/0/0/0.112:
+        description : ce12
+        type : l3
+        ip_add : 11.2.1.50 255.255.255.0   
+
+      GigabitEthernet0/0/0/0.511:
+        description : agg1xr1
+        type : l3
+        ip_add : 51.1.1.50 255.255.255.0  
+
+      GigabitEthernet0/0/0/0.512:
+        description : agg1xr2
+        type : l3
+        ip_add : 51.2.1.50 255.255.255.0   
+
+
+  pe2xr:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 2.2.2.1 255.255.255.255
+        ipv6_add : 2001:2:2:2:2::1/128
+
+      Loopback1:
+        type : l3
+        ip_add : 2.2.2.2 255.255.255.255
+        ipv6_add : 2001:2:2:2:2::2/128
+
+
+      GigabitEthernet0/0/0/0.211:
+        description : ce21
+        type : l3
+        ip_add : 22.1.1.50 255.255.255.0  
+
+      GigabitEthernet0/0/0/0.212:
+        description : ce22
+        type : l3
+        ip_add : 22.2.1.50 255.255.255.0   
+
+      GigabitEthernet0/0/0/0.611:
+        description : agg2xr1
+        type : l3
+        ip_add : 61.1.1.50 255.255.255.0  
+
+      GigabitEthernet0/0/0/0.612:
+        description : agg2xr2
+        type : l3
+        ip_add : 61.2.1.50 255.255.255.0 
+
+  pe3xe:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 3.3.3.1 255.255.255.255
+        ipv6_add : 2001:3:3:3:3::1/128
+
+      Loopback1:
+        type : l3
+        ip_add : 3.3.3.3 255.255.255.255
+        ipv6_add : 2001:3:3:3:3::3/128
+
+
+      GigabitEthernet0/0.311:
+        description : ce31
+        type : l3
+        ip_add : 31.1.1.50 255.255.255.0  
+
+      GigabitEthernet0/0.312:
+        description : ce32
+        type : l3
+        ip_add : 31.2.1.50 255.255.255.0   
+
+      GigabitEthernet0/0.711:
+        description : agg3xe1
+        type : l3
+        ip_add : 71.1.1.50 255.255.255.0  
+
+      GigabitEthernet0/0.712:
+        description : agg3xe2
+        type : l3
+        ip_add : 71.2.1.50 255.255.255.0 
+ 
+  agg1xr:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 1.111.1.1 255.255.255.255
+        ipv6_add : 2001:111:1:1:1::1/128
+
+      Loopback1:
+        type : l3
+        ip_add : 1.111.1.11 255.255.255.255
+        ipv6_add : 2001:111:1:1:1::11/128
+
+      GigabitEthernet0/0/0/0.511:
+        description : pe1
+        type : l3
+        ip_add : 51.1.1.25 255.255.255.0  
+
+      GigabitEthernet0/0/0/0.512:
+        description : Pe1_2
+        type : l3
+        ip_add : 51.2.1.25 255.255.255.0   
+      GigabitEthernet0/0/0/0.551:
+        description : abr1xr1
+        type : l3
+        ip_add : 55.1.1.25 255.255.255.0  
+
+      GigabitEthernet0/0/0/0.552:
+        description : abr1xr2
+        type : l3
+        ip_add : 55.2.1.25 255.255.255.0  
+
+
+ 
+  agg2xe:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 2.111.2.1 255.255.255.255
+        ipv6_add : 2001:111:2:2:2::1/128
+
+      Loopback1:
+        type : l3
+        ip_add : 2.111.2.2 255.255.255.255
+        ipv6_add : 2001:111:2:2:2::2/128
+
+      GigabitEthernet0/0.611:
+        description : pe2_1
+        type : l3
+        ip_add : 61.1.1.25 255.255.255.0  
+
+      GigabitEthernet0/0.612:
+        description : pe2_2
+        type : l3
+        ip_add : 61.2.1.25 255.255.255.0   
+
+      GigabitEthernet0/0.651:
+        description : abr2xr1
+        type : l3
+        ip_add : 65.1.1.25 255.255.255.0  
+
+      GigabitEthernet0/0.652:
+        description : abr2xr2
+        type : l3
+        ip_add : 65.2.1.25 255.255.255.0 
+
+ 
+  agg3xe:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 3.111.3.1 255.255.255.255
+        ipv6_add : 2001:111:3:3:3::1/128
+
+      Loopback1:
+        type : l3
+        ip_add : 3.111.3.3 255.255.255.255
+        ipv6_add : 2001:111:3:3:3::3/128
+
+      GigabitEthernet0/0.711:
+        description : pe3_1
+        type : l3
+        ip_add : 71.1.1.25 255.255.255.0  
+
+      GigabitEthernet0/0.712:
+        description : p3_2
+        type : l3
+        ip_add : 71.2.1.25 255.255.255.0   
+
+      GigabitEthernet0/0.751:
+        description : abr3xe1
+        type : l3
+        ip_add : 75.1.1.25 255.255.255.0  
+
+      GigabitEthernet0/0.752:
+        description : abr3xe2
+        type : l3
+        ip_add : 75.2.1.25 255.255.255.0  
+
+ 
+  abr1xr:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 1.112.1.1 255.255.255.255
+        ipv6_add : 2001:112:1:1:1::1/128
+
+      Loopback1:
+        type : l3
+        ip_add : 1.112.1.11 255.255.255.255
+        ipv6_add : 2001:112:1:1:1::11/128
+
+      GigabitEthernet0/0/0/0.1011:
+        description : core1xe1
+        type : l3
+        ip_add : 101.1.1.111 255.255.255.0  
+
+      GigabitEthernet0/0/0/0.1012:
+        description : core1xe2
+        type : l3
+        ip_add : 101.2.1.111 255.255.255.0   
+
+      GigabitEthernet0/0/0/0.551:
+        description : agg1xr1
+        type : l3
+        ip_add : 55.1.1.111 255.255.255.0  
+
+      GigabitEthernet0/0/0/0.552:
+        description : agg1xr2
+        type : l3
+        ip_add : 55.2.1.111 255.255.255.0  
+
+  abr2xr:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 2.112.2.1 255.255.255.255
+        ipv6_add : 2001:112:2:2:2::1/128
+
+      Loopback1:
+        type : l3
+        ip_add : 2.112.2.2 255.255.255.255
+        ipv6_add : 2001:112:2:2:2::2/128
+
+      GigabitEthernet0/0/0/0.1021:
+        description : core1xe1
+        type : l3
+        ip_add : 101.11.1.111 255.255.255.0  
+
+      GigabitEthernet0/0/0/0.1022:
+        description : core1xe2
+        type : l3
+        ip_add : 101.21.1.111 255.255.255.0   
+
+      GigabitEthernet0/0/0/0.651:
+        description : agg2xe1
+        type : l3
+        ip_add : 65.1.1.111 255.255.255.0  
+
+      GigabitEthernet0/0/0/0.652:
+        description : agg2xe2
+        type : l3
+        ip_add : 65.2.1.111 255.255.255.0  
+
+
+  abr3xe:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 3.112.3.1 255.255.255.255
+        ipv6_add : 2001:112:3:3:3::1/128
+
+      Loopback1:
+        type : l3
+        ip_add : 3.112.3.3 255.255.255.255
+        ipv6_add : 2001:112:3:3:3::3/128
+
+      GigabitEthernet0/0.1031:
+        description : core1xe1
+        type : l3
+        ip_add : 101.31.1.111 255.255.255.0  
+
+      GigabitEthernet0/0.1032:
+        description : core1xe2
+        type : l3
+        ip_add : 101.32.1.111 255.255.255.0   
+
+      GigabitEthernet0/0.751:
+        description : agg3xe1
+        type : l3
+        ip_add : 75.1.1.111 255.255.255.0  
+
+      GigabitEthernet0/0.752:
+        description : agg3xe2
+        type : l3
+        ip_add : 75.2.1.111 255.255.255.0 
+
+  core1xe:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 100.1.1.1 255.255.255.255
+        ipv6_add : 2001:100:100:1:1::1/128
+
+      Loopback1:
+        type : l3
+        ip_add : 100.1.1.11 255.255.255.255
+        ipv6_add : 2001:100:100:1:1::11/128
+
+
+      GigabitEthernet0/0.1011:
+        description : abr1xr1
+        type : l3
+        ip_add : 101.1.1.99 255.255.255.0  
+
+      GigabitEthernet0/0.1012:
+        description : abr1xr2
+        type : l3
+        ip_add : 101.2.1.99 255.255.255.0   
+
+      GigabitEthernet0/0.1021:
+        description : abr2xr1
+        type : l3
+        ip_add : 101.11.1.99 255.255.255.0  
+
+      GigabitEthernet0/0.1022:
+        description : abr2xr2
+        type : l3
+        ip_add : 101.21.1.99 255.255.255.0   
+      
+      GigabitEthernet0/0.1031:
+        description : abr3xe1
+        type : l3
+        ip_add : 101.31.1.99 255.255.255.0  
+
+      GigabitEthernet0/0.1032:
+        description : abr3xe2
+        type : l3
+        ip_add : 101.32.1.99 255.255.255.0   
+
+ 
+protocols:
+
+
+    isis:
+        core1xe:
+          net: '49.0001.0000.0000.0001.00'
+          interfaces:
+            level-2:
+              [GigabitEthernet0/0.1011,GigabitEthernet0/0.1012,GigabitEthernet0/0.1021,GigabitEthernet0/0.1022,GigabitEthernet0/0.1031,GigabitEthernet0/0.1032]
+
+        abr1xr:
+          net: '41.0001.0000.0000.0022.00'
+          is_type : 
+          interfaces:
+            level-2:
+              [GigabitEthernet0/0/0/0.1011,GigabitEthernet0/0/0/0.1012]
+            level-1:
+              [GigabitEthernet0/0/0/0.551,GigabitEthernet0/0/0/0.552]
+
+        agg1xr:
+          net: '41.0001.0000.0000.0091.00'
+          is_type : 
+          interfaces:
+            level-1:
+              [GigabitEthernet0/0/0/0.511,GigabitEthernet0/0/0/0.512,GigabitEthernet0/0/0/0.551,GigabitEthernet0/0/0/0.552]
+
+        pe1xr:
+          net: '41.0001.0000.0000.0002.00'
+          is_type : 
+          interfaces:
+            level-1:
+              [GigabitEthernet0/0/0/0.511,GigabitEthernet0/0/0/0.512]
+ 
+        abr2xr:
+          net: '42.0001.0000.0000.0003.00'
+          is_type : 
+          interfaces:
+            level-2:
+              [GigabitEthernet0/0/0/0.1021,GigabitEthernet0/0/0/0.1022]
+            level-1:
+              [GigabitEthernet0/0/0/0.651,GigabitEthernet0/0/0/0.652]
+
+        agg2xe:
+          net: '42.0001.0000.0000.0081.00'
+          is_type : 
+          interfaces:
+            level-1:
+              [GigabitEthernet0/0.611,GigabitEthernet0/0.612,GigabitEthernet0/0.651,GigabitEthernet0/0.652]
+
+        pe2xr:
+          net: '42.0001.0000.0000.0002.00'
+          is_type : 
+          interfaces:
+            level-1:
+              [GigabitEthernet0/0/0/0.611,GigabitEthernet0/0/0/0.612]
+
+        abr3xe:
+          net: '43.0001.0000.0000.0004.00'
+          is_type : 
+          interfaces:
+            level-2:
+              [GigabitEthernet0/0.1031,GigabitEthernet0/0.1032]
+            level-1:
+              [GigabitEthernet0/0.751,GigabitEthernet0/0.752]
+
+        agg3xe:
+          net: '43.0001.0000.0000.0071.00'
+          is_type : 
+          interfaces:
+            level-1:
+              [GigabitEthernet0/0.711,GigabitEthernet0/0.712,GigabitEthernet0/0.751,GigabitEthernet0/0.752]
+        pe3xe:
+          net: '43.0001.0000.0000.0002.00'
+          is_type : 
+          interfaces:
+            level-1:
+              [GigabitEthernet0/0.711,GigabitEthernet0/0.712]
+
+    ospf:
+        iosv-0:
+          rid: '1.1.1.1'
+          area:
+            2:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0.100,GigabitEthernet0/0.101]    
+              type:
+                standard
+ 
+
+    bgp:
+        nxos9000-0 :
+          as: 
+            100
+          networks: 
+            [loopback]    
+          neighbor:
+            2.2.2.1
+          remote-as:
+            100
+          rid:
+            1.1.1.1
+        nxos9000-1 :
+          as: 
+            100
+          networks: 
+            [loopback]    
+          neighbor:
+            1.1.1.1
+          remote-as:
+            100
+          rid:
+            2.2.2.1
+              
+        nxos9000-2 :
+          as: 
+            200
+          networks: 
+            [loopback]    
+          neighbor:
+            4.4.4.1
+          remote-as:
+            200
+          rid:
+            3.3.3.1
+        nxos9000-3 :
+          as: 
+            200
+          networks: 
+            [loopback]    
+          neighbor:
+            3.3.3.1
+          remote-as:
+            200
+          rid:
+            4.4.4.1
+    pim:
+        nxos9000-0 :
+          rp_add: 
+            5.5.5.1
+        nxos9000-1 :
+          rp_add: 
+            5.5.5.1
+        nxos9000-2 :
+          rp_add: 
+            6.6.6.1
+        nxos9000-3 :
+          rp_add: 
+            6.6.6.1
+ 
+        iosv-0:
+          rp_add: 
+            5.5.5.1
+ 
+        iosv-1:
+          rp_add: 
+            6.6.6.1
+    ebgp:
+        nxos9000-1 :
+          as: 
+            100
+          networks: 
+            [loopback]    
+          neighbor:
+            15.15.1.2
+          remote-as:
+            200
+          update-source:
+            Ethernet1/5
+              
+        nxos9000-2 :
+          as: 
+            200
+          networks: 
+            [loopback]    
+          neighbor:
+            15.15.1.1
+          remote-as:
+            100
+          update-source:
+            Ethernet1/5

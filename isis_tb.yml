@@ -1,0 +1,235 @@
+#n0        0,1             core1xe              unifiedMPLS
+#n1      0,1,2              abr2xr              unifiedMPLS
+ 
+#n2      0,1,2              abr1xr              unifiedMPLS
+#n3        0,1              abr3xe              unifiedMPLS
+#n4        0,1             agg2xe              unifiedMPLS
+#n5      0,1,2             agg1xr              unifiedMPLS
+#n6        0,1             agg3xe              unifiedMPLS
+#n7      0,1,2               pe2xr              unifiedMPLS
+#n8      0,1,2               pe1xr              unifiedMPLS
+#n9        0,1               pe3xe              unifiedMPLS
+
+devices:
+  jumphost:
+    os: linux
+    type: linux
+    connections:
+      cli:
+        protocol: ssh
+        ip: 192.168.43.45
+        #ip: 192.168.0.105
+    credentials:
+        default:                         # login credentials
+            username: admin
+            password: nbv12345
+
+  xrv-0:
+    os: iosxr
+    type: router
+    alias: xrv_0
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  xrv-1:
+    os: iosxr
+    type: router
+    alias: xrv_1
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  xrv-2:
+    os: iosxr
+    type: router
+    alias: xrv_2
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  xrv-3:
+    os: iosxr
+    type: router
+    alias: xrv_3
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  xrv-4:
+    os: iosxr
+    type: router
+    alias: xrv_4
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  xrv-5:
+    os: iosxr
+    type: router
+    alias: xrv_5
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  xrv-6:
+    os: iosxr
+    type: router
+    alias: xrv_6
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  xrv-7:
+    os: iosxr
+    type: router
+    alias: xrv_7
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  xrv-8:
+    os: iosxr
+    type: router
+    alias: xrv_8
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  xrv-9:
+    os: iosxr
+    type: router
+    alias: xrv_9
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  xrv-10:
+    os: iosxr
+    type: router
+    alias: xrv_10
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  xrv-11:
+    os: iosxr
+    type: router
+    alias: xrv_11
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+  nxos9000-0:
+    os: nxos
+    type: router
+    alias: nxos9000_0
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /f3225e7f/n0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+    

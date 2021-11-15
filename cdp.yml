@@ -1,0 +1,268 @@
+2021-04-12T19:49:23: %AETEST-INFO: The result of subsection connect_to_tb_devices is => PASSED
+2021-04-12T19:49:23: %AETEST-INFO: +------------------------------------------------------------------------------+
+2021-04-12T19:49:23: %AETEST-INFO: |                    Starting subsection basic_conf_devices                    |
+2021-04-12T19:49:23: %AETEST-INFO: +------------------------------------------------------------------------------+
+
+2021-04-12 19:49:23,243: %UNICON-INFO: +++ CE1: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP1PE1.virl.info Gig 0/4           177               R    IOS XRv S Gig 0/0/0/4
+SP1PE1.virl.info Gig 0/0           162               R    IOS XRv S Gig 0/0/0/0
+
+Total cdp entries displayed : 2
+CE1#
+
+2021-04-12 19:49:24,209: %UNICON-INFO: +++ SP1PE1: executing command 'show cdp neigh' +++
+show cdp neigh
+Mon Apr 12 14:19:22.852 UTC
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater
+
+Device ID       Local Intrfce    Holdtme Capability Platform  Port ID
+CE1             Gi0/0/0/0        126     R B        Cisco     Gi0/0           
+SP1P1           Gi0/0/0/1        169     R          IOS XRv S Gi0/0/0/1       
+SP1P1           Gi0/0/0/2        173     R          IOS XRv S Gi0/0/0/2       
+CE1             Gi0/0/0/4        179     R B        Cisco     Gi0/4           
+RP/0/0/CPU0:SP1PE1#
+
+2021-04-12 19:49:24,564: %UNICON-INFO: +++ SP1P1: executing command 'show cdp neigh' +++
+show cdp neigh
+Mon Apr 12 14:19:22.862 UTC
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater
+
+Device ID       Local Intrfce    Holdtme Capability Platform  Port ID
+SP1PE1.virl.inf Gi0/0/0/1        164     R          IOS XRv S Gi0/0/0/1       
+SP1PE1.virl.inf Gi0/0/0/2        168     R          IOS XRv S Gi0/0/0/2       
+SP1P2           Gi0/0/0/4        149     R B        Cisco     Gi0/4           
+RP/0/0/CPU0:SP1P1#
+
+2021-04-12 19:49:24,915: %UNICON-INFO: +++ SP1P2: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP1PE2.virl.info Gig 0/2           172               R    IOS XRv S Gig 0/0/0/1
+SP1P1            Gig 0/4           120               R    IOS XRv S Gig 0/0/0/4
+
+Total cdp entries displayed : 2
+SP1P2#
+
+2021-04-12 19:49:26,018: %UNICON-INFO: +++ SP1PE2: executing command 'show cdp neigh' +++
+show cdp neigh
+Mon Apr 12 14:19:24.621 UTC
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater
+
+Device ID       Local Intrfce    Holdtme Capability Platform  Port ID
+SP2PE1          Gi0/0/0/0        155     R          IOS XRv S Gi0/0/0/0       
+SP1P2           Gi0/0/0/1        155     R B        Cisco     Gi0/2           
+RP/0/0/CPU0:SP1PE2#
+
+2021-04-12 19:49:26,399: %UNICON-INFO: +++ CE2: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP2PE2.virl.info Gig 0/4           132               R    IOS XRv S Gig 0/0/0/4
+
+Total cdp entries displayed : 1
+CE2#
+
+2021-04-12 19:49:27,322: %UNICON-INFO: +++ SP2PE1: executing command 'show cdp neigh' +++
+show cdp neigh
+Mon Apr 12 14:19:25.750 UTC
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater
+
+Device ID       Local Intrfce    Holdtme Capability Platform  Port ID
+SP1PE2.virl.inf Gi0/0/0/0        165     R          IOS XRv S Gi0/0/0/0       
+SP2P1           Gi0/0/0/1        132     R B        Cisco     Gi0/2           
+RP/0/0/CPU0:SP2PE1#
+
+2021-04-12 19:49:27,744: %UNICON-INFO: +++ SP2P1: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP2PE1           Gig 0/2           158               R    IOS XRv S Gig 0/0/0/1
+SP2PE2.virl.info Gig 0/0           176               R    IOS XRv S Gig 0/0/0/0
+
+Total cdp entries displayed : 2
+SP2P1#
+
+2021-04-12 19:49:28,829: %UNICON-INFO: +++ SP2PE2: executing command 'show cdp neigh' +++
+show cdp neigh
+Mon Apr 12 14:19:28.199 UTC
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater
+
+Device ID       Local Intrfce    Holdtme Capability Platform  Port ID
+SP2P1           Gi0/0/0/0        149     R B        Cisco     Gi0/0           
+SP3PE1          Gi0/0/0/2        140     R B        Cisco     Gi0/3           
+CE2             Gi0/0/0/4        172     R B        Cisco     Gi0/4           
+RP/0/0/CPU0:SP2PE2#
+
+2021-04-12 19:49:29,145: %UNICON-INFO: +++ SP3PE1: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP2PE2.virl.info Gig 0/3           122               R    IOS XRv S Gig 0/0/0/2
+CE4              Gig 0/2           141              R B             Gig 0/2
+SP3P1            Gig 0/4           169              R B             Gig 0/4
+SP3P2            Gig 0/0           163              R B             Gig 0/1
+
+Total cdp entries displayed : 4
+SP3PE1#
+
+2021-04-12 19:49:30,429: %UNICON-INFO: +++ SP3PE2: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+CE3              Gig 0/3           144              R B             Gig 0/3
+SP3P5            Gig 0/1           156              R B             Gig 0/0
+SP3P6            Gig 0/4           171              R B             Gig 0/4
+
+Total cdp entries displayed : 3
+SP3PE2#
+
+2021-04-12 19:49:31,530: %UNICON-INFO: +++ SP3PE3: executing command 'show cdp neigh' +++
+show cdp neigh
+Mon Apr 12 14:19:30.117 UTC
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater
+
+Device ID       Local Intrfce    Holdtme Capability Platform  Port ID
+SP3P6           Gi0/0/0/1        154     R B        Cisco     Gi0/2           
+SP3P5           Gi0/0/0/2        125     R B        Cisco     Gi0/3           
+CE3             Gi0/0/0/4        127     R B        Cisco     Gi0/4           
+RP/0/0/CPU0:SP3PE3#
+
+2021-04-12 19:49:31,953: %UNICON-INFO: +++ CE3: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP3PE2           Gig 0/3           175              R B             Gig 0/3
+SP3PE3.virl.info Gig 0/4           150               R    IOS XRv S Gig 0/0/0/4
+
+Total cdp entries displayed : 2
+CE3#
+
+2021-04-12 19:49:32,939: %UNICON-INFO: +++ CE4: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP3PE1           Gig 0/2           156              R B             Gig 0/2
+
+Total cdp entries displayed : 1
+CE4#
+
+2021-04-12 19:49:33,844: %UNICON-INFO: +++ SP3P1: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP3PE1           Gig 0/4           166              R B             Gig 0/4
+SP3P3            Gig 0/0           139              R B             Gig 0/1
+SP3P4            Gig 0/2           135              R B             Gig 0/2
+
+Total cdp entries displayed : 3
+SP3P1#
+
+2021-04-12 19:49:34,945: %UNICON-INFO: +++ SP3P2: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP3PE1           Gig 0/1           142              R B             Gig 0/0
+SP3P3            Gig 0/4           149              R B             Gig 0/4
+SP3P4            Gig 0/3           148              R B             Gig 0/3
+
+Total cdp entries displayed : 3
+SP3P2#
+
+2021-04-12 19:49:36,041: %UNICON-INFO: +++ SP3P3: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP3P1            Gig 0/1           165              R B             Gig 0/0
+SP3P2            Gig 0/4           126              R B             Gig 0/4
+SP3P5            Gig 0/2           141              R B             Gig 0/2
+SP3P6            Gig 0/3           124              R B             Gig 0/3
+
+Total cdp entries displayed : 4
+SP3P3#
+
+2021-04-12 19:49:37,357: %UNICON-INFO: +++ SP3P4: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP3P1            Gig 0/2           157              R B             Gig 0/2
+SP3P2            Gig 0/3           161              R B             Gig 0/3
+SP3P5            Gig 0/4           157              R B             Gig 0/4
+SP3P6            Gig 0/0           170              R B             Gig 0/1
+
+Total cdp entries displayed : 4
+SP3P4#
+
+2021-04-12 19:49:38,552: %UNICON-INFO: +++ SP3P5: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP3PE2           Gig 0/0           159              R B             Gig 0/1
+SP3PE3.virl.info Gig 0/3           135               R    IOS XRv S Gig 0/0/0/2
+SP3P3            Gig 0/2           156              R B             Gig 0/2
+SP3P4            Gig 0/4           166              R B             Gig 0/4
+
+Total cdp entries displayed : 4
+SP3P5#
+
+2021-04-12 19:49:39,761: %UNICON-INFO: +++ SP3P6: executing command 'show cdp neigh' +++
+show cdp neigh
+Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+                  S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+                  D - Remote, C - CVTA, M - Two-port Mac Relay 
+
+Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
+SP3PE2           Gig 0/4           130              R B             Gig 0/4
+SP3PE3.virl.info Gig 0/2           130               R    IOS XRv S Gig 0/0/0/1
+SP3P3            Gig 0/3           136              R B             Gig 0/3
+SP3P4            Gig 0/1           147              R B             Gig 0/0
+
+Total cdp entries displayed : 4
+SP3P6#
