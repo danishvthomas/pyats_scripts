@@ -7,7 +7,7 @@ def main(runtime):
     'main entry point for a job is the main() function'
 
     # find our abspath to the script
-    script = os.path.join(HERE, 'mpls1_xr.py')
+    script = os.path.join(HERE, 'mpls2.py')
 
     # run this script as a task under this job
     # Note:

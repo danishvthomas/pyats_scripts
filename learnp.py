@@ -35,12 +35,7 @@ def searchBin(list2,element):
             index_max = mid_index-1
         return False
 
-
-    for i in range(len(list)):
-        if list[i] == element:
-            print('Found, Index is:',i)
-            return True
-    return False
+ 
 
  
 def sortBub(list2):

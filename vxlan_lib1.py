@@ -1,0 +1,118 @@
+
+feature nxapi
+nv overlay evpn
+feature ospf
+feature bgp
+feature pim
+feature interface-vlan
+feature vn-segment-vlan-based
+feature nv overlay
+
+fabric forwarding anycast-gateway-mac 0000.2222.3333
+vlan 1,10,100-110
+vlan 10
+ vn-segment 900001
+vlan 101
+ vn-segment 2001001
+vlan 102
+ vn-segment 2001002
+
+
+vrf context vxlan-900001
+ vni 900001
+ rd auto
+ address-family ipv4 unicast
+   route-target both auto
+   route-target both auto evpn
+ address-family ipv6 unicast
+   route-target both auto
+   route-target both auto evpn
+
+nxapi http port 8080
+
+
+interface Vlan1
+
+interface Vlan10
+ no shutdown
+ vrf member vxlan-900001
+ ip forward
+
+interface Vlan101
+ no shutdown
+ vrf member vxlan-900001
+ ip address 101.1.1.1/24
+ ipv6 address 101:1:0:1::1/64
+ fabric forwarding mode anycast-gateway
+
+interface Vlan102
+ no shutdown
+ vrf member vxlan-900001
+ ip address 102.1.1.1/24
+ ipv6 address 102:1:0:1::1/64
+ fabric forwarding mode anycast-gateway
+
+interface nve1
+ no shutdown
+ host-reachability protocol bgp
+ source-interface loopback0
+ member vni 900001 associate-vrf
+ member vni 2001001
+   ingress-replication protocol bgp
+ member vni 2001002
+   ingress-replication protocol bgp
+
+interface Ethernet1/1
+ ip address 101.1.1.1/24
+ ip router ospf 100 area 0.0.0.0
+ no shutdown
+
+interface Ethernet1/2
+ ip address 101.2.1.1/24
+ ip router ospf 100 area 0.0.0.0
+ no shutdown
+
+interface Ethernet1/3
+ switchport
+ switchport mode trunk
+ switchport trunk allowed vlan 100-110
+ no shutdown
+
+interface loopback0
+ ip address 12.1.1.1/32
+ ipv6 address 2001:2:110:2:2::1b2a/128
+ ipv6 address 2001:2:159:2:2::71da/128
+ ipv6 address 2001:2:192:2:2::49f3/128
+ ip router ospf 100 area 0.0.0.0
+
+interface loopback10
+ ip address 2.2.2.10/32
+ ipv6 address 2001:2:118:2:2::c0f7/128
+ ipv6 address 2001:2:152:2:2::3f2/128
+ ipv6 address 2001:2:175:2:2::4b2a/128
+
+interface loopback100
+ ip address 2.2.2.100/32
+ ipv6 address 2001:2:138:2:2::f91c/128
+ ipv6 address 2001:2:153:2:2::4133/128
+ ipv6 address 2001:2:171:2:2::a91f/128
+
+router ospf 100
+ router-id 12.1.1.1
+router bgp 100
+ router-id 12.1.1.1
+ address-family l2vpn evpn
+ neighbor 1.1.1.1
+   remote-as 100
+   update-source loopback0
+   address-family l2vpn evpn
+     send-community
+     send-community extended
+evpn
+ vni 2001001 l2
+ vni 2001002 l2
+   rd auto
+   route-target import auto
+   route-target export auto
+
+no logging console

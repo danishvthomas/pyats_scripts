@@ -6,13 +6,13 @@ devices:
       cli:
         protocol: ssh
         #ip: 172.16.87.128
-        ip: 192.168.0.105
+        ip: 192.168.0.62
     credentials:
         default:                         # login credentials
             username: admin
             password: nbv12345
 
- 
+
   CEL7:
     os: iosxe
     type: router
@@ -29,7 +29,7 @@ devices:
       default:
         password: cisco
         username: cisco
- 
+
   CEL6:
     os: iosxe
     type: router
@@ -46,7 +46,7 @@ devices:
       default:
         password: cisco
         username: cisco
- 
+
   SP1R5:
     os: iosxe
     type: router
@@ -63,7 +63,7 @@ devices:
       default:
         password: cisco
         username: cisco
- 
+
   SP2R5:
     os: iosxe
     type: router
@@ -97,7 +97,7 @@ devices:
       default:
         password: cisco
         username: cisco
- 
+
   CER6:
     os: iosxe
     type: router
@@ -114,7 +114,7 @@ devices:
       default:
         password: cisco
         username: cisco
- 
+
 
   SP1R1:
     os: iosxr
@@ -182,7 +182,7 @@ devices:
       default:
         password: cisco
         username: cisco
- 
+
   SP2R1:
     os: iosxr
     type: router

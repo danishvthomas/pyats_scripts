@@ -1,5 +1,5 @@
 import logging
-
+import yaml
 from pyats import aetest
 from genie.testbed import load
 from pyats.async_ import pcall
@@ -29,10 +29,10 @@ from genie.conf.base import Testbed, Device, Link, Interface
 from genie.libs.conf.vrf import Vrf
 from genie.libs.conf.interface import Interface
 from genie.libs.conf.ospf import Ospf
-from genie.libs.conf.ospf.gracefulrestart import Gracefulxrv_estart
-from genie.libs.conf.ospf.stubrouter import Stubxrv_outer
+from genie.libs.conf.ospf.gracefulrestart import GracefulRestart
+from genie.libs.conf.ospf.stubrouter import StubRouter
 from genie.libs.conf.ospf.areanetwork import AreaNetwork
-from genie.libs.conf.ospf.arearange import Areaxrv_ange
+from genie.libs.conf.ospf.arearange import AreaRange
 from genie.libs.conf.ospf.interfacestaticneighbor import InterfaceStaticNeighbor
 
 logger = logging.getLogger(__name__)
@@ -68,26 +68,19 @@ class CommonSetup(aetest.CommonSetup):
         self.parent.parameters['testbed'] = testbed = load(testbed)
         global uut_list,xrv_1,xrv_2,xrv_3,xrv_4,xrv_5,xrv_6,xrv_7,xrv_8,xr_uut_list,\
             SP3PE2,SP3PE3,CE3,CE4,SP3P1,SP3P2,SP3P3,SP3P4,SP3P5,SP3P6,sp1_uut_list,\
-            core_uut_list_iosxe,xr_uut_list,xe_uut_list,core_uut_list,sp3_uut_list,sp2_uut_list,\
-            CE1,PE1AS1,P1AS1,PE2AS1,CSCPE1,CSCP1,CSCPE2,PE1AS2,P1AS2,PE2AS2,CE2
+            core_uut_list_iosxe,xr_uut_list,xe_uut_list,core_uut_list,sp3_uut_list,sp2_uut_list
 
-        CE1 = testbed.devices['CE1']
-        PE1AS1 = testbed.devices['PE1AS1']
-        P1AS1 = testbed.devices['P1AS1']
-        PE2AS1 = testbed.devices['PE2AS1']
-        CSCPE1 = testbed.devices['CSCPE1']
-        CSCP1 = testbed.devices['CSCP1']
-        CSCPE2 = testbed.devices['CSCPE2']
-        PE1AS2 = testbed.devices['PE1AS2']
-        P1AS2 = testbed.devices['P1AS2']
-        PE2AS2 = testbed.devices['PE2AS2']
-        CE2 = testbed.devices['CE2']
-
-
+        xrv_1 = testbed.devices['xrv_1']
+        xrv_2 = testbed.devices['xrv_2']
+        xrv_3 = testbed.devices['xrv_3']
+        xrv_4 = testbed.devices['xrv_4']
+        xrv_5 = testbed.devices['xrv_5']
+        xrv_6 = testbed.devices['xrv_6']
+        xrv_7 = testbed.devices['xrv_7']
 
 
         uut_list1 =  list(testbed.devices.keys())
-        uut_list = [CE1,PE1AS1,P1AS1,PE2AS1,CSCPE1,CSCP1,CSCPE2,PE1AS2,P1AS2,PE2AS2,CE2]
+        uut_list = [xrv_1,xrv_2,xrv_3,xrv_4,xrv_5,xrv_6,xrv_7]
         xe_uut_list = []
         core_uut_list = []
         sp3_uut_list = []
@@ -113,7 +106,7 @@ class CommonSetup(aetest.CommonSetup):
         jumphost.connect()
         op1 = jumphost.execute("list")
         for line in op1.splitlines():
-            if 'mpls' in line:
+            if 'MPLS' in line:
                 lab_id = str(line.split()[0])
                 node_label = str(line.split()[3])
                 node_id = str(line.split()[1])
@@ -134,7 +127,8 @@ class CommonSetup(aetest.CommonSetup):
         logger.info('Configuring ISIS' )
         #configure_sr_isis_xe
         logger.info('Configuring Sxrv_' )
-
+        for uut in uut_list:
+            configure_isis_new(uut,area_l1_1,uut_list.remove(uut))
 
         sr_isis_cfg = \
         """
@@ -167,11 +161,11 @@ class CommonSetup(aetest.CommonSetup):
         mpls traffic-eng level-1
 
         """
-        for uut in uut_list:
-            uut.configure(cmd)
+        #for uut in uut_list:
+        #    uut.configure(cmd)
         #pcall(configure_sr_isis_xe,uut=tuple(uut_list))
-        for uut in uut_list:
-            uut.execute("clear isis *")
+        #for uut in uut_list:
+        #    uut.execute("clear isis *")
         #pcall(configure_sr_isis_x
 
 class check_sr_isis(aetest.Testcase):

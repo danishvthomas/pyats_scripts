@@ -7,7 +7,7 @@ def main(runtime):
     'main entry point for a job is the main() function'
 
     # find our abspath to the script
-    script = os.path.join(HERE, 'isis.py')
+    script = os.path.join(HERE, 'igp.py')
 
     # run this script as a task under this job
     # Note:
