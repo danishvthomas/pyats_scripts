@@ -38,6 +38,9 @@ from genie.libs.conf.ospf.interfacestaticneighbor import InterfaceStaticNeighbor
 logger = logging.getLogger(__name__)
 from unicon.eal.dialogs import Statement, Dialog
  
+import logging
+# get your logger for your script
+log = logging.getLogger(__name__)
 
 def changeName(uut):
     uut_name = uut.name.replace("","")
@@ -55,94 +58,183 @@ class CommonSetup(aetest.CommonSetup):
         # adding .learn() and .parse() functionality
         # this step will be harmonized and no longer required in near future
         self.parent.parameters['testbed'] = testbed = load(testbed)
-        global uut_list,core1xe, abr2xr, ce1, ce2, ce3, abr1xr, abr3xe, agg2xe, agg1xr, agg3xe, pe2xr, pe1xr, pe3xe,\
-               xe_uut_list,xr_uut_list,uut_list_core
+        global uut_list, XR1,XR2,XR3,XR4,XR5,XR6,XR7,XR8,PE11,PE12,PE2,CE1,CE2,uut_list_core,\
+        igp_inst_a1,igp_inst_a2,igp_inst_c,conf_dict_list_core
 
   
-
         # connect to device
-        ce1	=	testbed.devices["ce1"]
-        ce2	=	testbed.devices["ce2"]
-        ce3	=	testbed.devices["ce3"]
+        CE1	=	testbed.devices["CE1"]
+        CE2	=	testbed.devices["CE2"]
+        PE11	=	testbed.devices["PE11"]
+        PE12	=	testbed.devices["PE12"]
+        PE2	=	testbed.devices["PE2"]
+        XR1	=	testbed.devices["XR1"]
+        XR2	=	testbed.devices["XR2"]
+        XR3	=	testbed.devices["XR3"]
+        XR4	=	testbed.devices["XR4"]
+        XR5	=	testbed.devices["XR5"]
+        XR6	=	testbed.devices["XR6"]
+        XR7	=	testbed.devices["XR7"]
+        XR8	=	testbed.devices["XR8"]
 
-        abr2xr	=	testbed.devices["abr2xr"]
-        abr1xr	=	testbed.devices["abr1xr"]
-        abr3xe	=	testbed.devices["abr3xe"]
+        igp_inst_a1=("AGG1","AGG1","AGG1","AGG1","AGG1" )
+        igp_inst_c=("CORE","CORE","CORE","CORE" )
+        igp_inst_a2=("AGG2","AGG2","AGG2","AGG2" )
+ 
+        uut_list = [ XR1,XR2,XR3,XR4,XR5,XR6,XR7,XR8,PE11,PE12,PE2,CE1,CE2]
+        uut_list_core = [ XR1,XR2,XR3,XR4,XR5,XR6,XR7,XR8,PE11,PE12,PE2]
 
-        core1xe	=	testbed.devices["core1xe"]
-
-        agg2xe	=	testbed.devices["agg2xe"]
-        agg1xr	=	testbed.devices["agg1xr"]
-        agg3xe	=	testbed.devices["agg3xe"]
-
-        pe2xr	=	testbed.devices["pe2xr"]
-        pe1xr	=	testbed.devices["pe1xr"]
-        pe3xe	=	testbed.devices["pe3xe"]
-
-
-        uut_list = [core1xe, abr2xr, ce1, ce2, ce3, abr1xr, abr3xe, agg2xe, agg1xr, agg3xe, pe2xr, pe1xr, pe3xe]
-        xe_uut_list = [core1xe, abr3xe, agg2xe, agg3xe, pe3xe,ce1, ce2, ce3]
-        xr_uut_list = [abr2xr, abr1xr, agg1xr, pe2xr, pe1xr]
-        uut_list_core = [core1xe, abr2xr, abr1xr, abr3xe, agg2xe, agg1xr, agg3xe, pe2xr, pe1xr, pe3xe]
-
-
-
+        conf_dict=yaml.load(open('umpls_topo.yaml'))
+        conf_dict_list_core = []
+        for uut in uut_list_core:
+            conf_dict_list_core.append(conf_dict)
 
         jumphost = testbed.devices['jumphost']
         jumphost.connect()
         op1 = jumphost.execute("list")
-        for line in op1.splitlines():
-            if 'unifiedMPLS' in line:
-                lab_id = str(line.split()[0])
-                node_label = str(line.split()[3])
-                node_id = str(line.split()[1])
-                for uut in uut_list:
-                    if uut.name == node_label:
-                        uut.connections['cli']["command"]='open /'+lab_id+'/'+node_id+'/0'
-   
-                logger.info('lab_id is : %s' % lab_id)
 
-        
- 
-        
-        for uut in uut_list:
-        #for uut in [abr2xr,p1xe]:    
+        for uut in uut_list:       
+        #for uut in [CE2]:
         	uut.connect()
  
-
  
     @aetest.subsection
-    def basic_conf_devices(self, testbed):
-         
-        #      ce1---pe1--
-        #        |  X   |   X  |  X   |   X    |
-        #iosv7 xrv0xrv1xrv2xrv6xrv7xrv8
-        #        |  X   |   X  |  X   |   X    |   
-        #     xrv3iosv3xrv4iosv4iosv6
-        #       l20         l21 
- 
-        #    area1    ABR   ASBR     
-        uut_list1 = [core1xe,abr1xr]  
-
-        conf_dict=yaml.load(open('umpls_topo.yaml'))
-       
-     
-        conf_dict_list = []
-        for uut in uut_list:
-            conf_dict_list.append(conf_dict)
-       
+    def cleanup(self, testbed):
         pcall(unshut_intf,uut=tuple(uut_list))
         pcall(remove_intf_all,uut=tuple(uut_list))
         pcall(cleanup_igp,uut=tuple(uut_list)) 
-        pcall(configure_interfaces,uut=tuple(uut_list),conf_dict=tuple(conf_dict_list))
-        pcall(configure_isis,uut=tuple(uut_list),conf_dict=tuple(conf_dict_list))
-        pcall(mplsldpAutoconfig,uut=tuple(uut_list_core))
-       
-        pcall(copy_run_start,uut=tuple(xe_uut_list))
-           
 
-        #import pdb ; pdb.set_trace()
-   
+    @aetest.subsection
+    def interFaceConf(self, testbed):
+        loopback_config(uut_list)
+        bringUpL3Link(CE1,[PE11,PE12])
+        bringUpL3Link(CE2,[PE2])
+        bringUpL3Link(XR1,[PE11,PE12,XR2,XR3])
+        bringUpL3Link(XR2,[PE11,PE12,XR3])
+
+        bringUpL3Link(XR4,[XR3,XR5,XR6])
+        bringUpL3Link(XR5,[XR3,XR6])
+
+        bringUpL3Link(XR7,[XR6,XR8,PE2])
+        bringUpL3Link(XR8,[XR6,PE2])
+ 
+    @aetest.subsection
+    def igpMpls(self, testbed):
+        pcall(configureIsis,uut=tuple(uut_list_core),conf_dict=tuple(conf_dict_list_core))
+        pcall(mplsldpAutoconfig,uut=tuple(uut_list_core))
+    
+    @aetest.subsection
+    def bgpLu(self, testbed):
+        addBgpUmplsxr(PE11,[XR3])
+        addBgpUmplsxr(PE12,[XR3])
+        addBgpUmplsxr(XR3,[PE11,PE12,XR6])
+        addBgpUmplsxr(XR6,[PE2,XR3])
+
+    @aetest.subsection
+    def bgpVpnV4(self, testbed):
+        addBgpVpnv4xr(PE11,[PE2])
+        addBgpVpnv4xr(PE12,[PE2])
+        addBgpVpnv4xr(PE2,[PE11,PE12])
+
+    @aetest.subsection
+    def l3VpnService(self, testbed):
+        for uut in [CE1,CE2]:
+            addOspfXr(uut)
+
+        addL3VpnService(PE11,"BLUE","G0/0/0/1","65001:1")
+        addL3VpnService(PE12,"BLUE","G0/0/0/0","65001:1")
+        addL3VpnService(PE2,"BLUE","G0/0/0/2","65001:1")
+
+
+
+class test1CEtoCEREach(aetest.Testcase):
+    @aetest.setup
+    def setup(self, section):
+        pass
+
+    @aetest.test
+    def test_1(self, section):
+        dest_ip_list = []
+        op1 = CE1.execute("show route ipv4 ospf")
+        for line in op1.splitlines():
+            if '/32' in line:
+                ip_add = line.split()[2]
+                ip1 = ip_add.split("/")[0]
+                dest_ip_list.append(ip1)
+
+ 
+        for ip1 in dest_ip_list:
+            CE1.execute(f"ping {ip1} sou loop0 repe 10")
+            res1 = CE1.execute(f"ping {ip1} sou loop0 repe 10")
+            if not 'Success rate is 100 percent' in res1:
+                log.info(f"FAILED PING FOR {ip1}")
+                self.failed()
+
+
+    @aetest.cleanup
+    def cleanup(self):
+        pass 
+        log.info("%s testcase cleanup/teardown" % self.uid)           
+ 
+
+
+class test2LdpToSRMigration(aetest.Testcase):
+    @aetest.setup
+    def setup(self, section):
+        pcall(configureSRxr,uut=(PE11,PE12,XR1,XR2,XR3),igp_inst=igp_inst_a1,index=(1,2,3,4,5))
+        pcall(configureSRxr,uut=(XR3,XR4,XR5,XR6),igp_inst=igp_inst_c,index=(1,20,30,40))
+        pcall(configureSRxr,uut=(XR6,XR7,XR8,PE2),igp_inst=igp_inst_a2,index=(40,22,33,13))
+ 
+
+    @aetest.test
+    def test_1_ping(self, section):
+        dest_ip_list = []
+        op1 = CE1.execute("show route ipv4 ospf")
+        for line in op1.splitlines():
+            if '/32' in line:
+                ip_add = line.split()[2]
+                ip1 = ip_add.split("/")[0]
+                dest_ip_list.append(ip1)
+ 
+        for ip1 in dest_ip_list:
+            CE1.execute(f"ping {ip1} sou loop0 repe 10")
+            res1 = CE1.execute(f"ping {ip1} sou loop0 repe 10")
+            if not 'Success rate is 100 percent' in res1:
+                log.info(f"FAILED PING FOR {ip1}")
+                self.failed()
+
+
+    @aetest.test
+    def removeLDP(self, section):
+        pcall(removeLdp,uut=(PE11,PE12,XR1,XR2,XR3),igp_inst=igp_inst_a1)
+        pcall(removeLdp,uut=(XR3,XR4,XR5,XR6),igp_inst=igp_inst_c)
+        pcall(removeLdp,uut=(XR6,XR7,XR8,PE2),igp_inst=igp_inst_a2)
+        import time
+        time.sleep(10)
+
+    @aetest.test
+    def test_2_ping(self, section):
+        dest_ip_list = []
+        op1 = CE1.execute("show route ipv4 ospf")
+        for line in op1.splitlines():
+            if '/32' in line:
+                ip_add = line.split()[2]
+                ip1 = ip_add.split("/")[0]
+                dest_ip_list.append(ip1)
+ 
+        for ip1 in dest_ip_list:
+            CE1.execute(f"ping {ip1} sou loop0 repe 10")
+            res1 = CE1.execute(f"ping {ip1} sou loop0 repe 10")
+            if not 'Success rate is 100 percent' in res1:
+                log.info(f"FAILED PING FOR {ip1}")
+                self.failed()
+
+    @aetest.cleanup
+    def cleanup(self):
+        pass 
+        log.info("%s testcase cleanup/teardown" % self.uid)           
+ 
+  
  
 if __name__ == "__main__":
     # if this script is run standalone

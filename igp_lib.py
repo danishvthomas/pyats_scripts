@@ -94,6 +94,134 @@ def bgpUMPLS(uut,nei_list):
         uut.configure(cmdxe)
 
 
+
+
+def vrfConfigXr(uut,vrf,RT):
+    cfg1 = \
+    f"""
+    vrf {vrf}
+    address-family ipv4 unicast
+    import route-target
+    {RT}
+    !
+    export route-target
+    {RT}   
+    !
+    !
+    address-family ipv6 unicast
+    import route-target
+    {RT}
+    !
+    export route-target
+    {RT}   
+    !
+    """
+    uut.configure(cfg1)
+
+def vrfIntfConfigXr(uut,vrf,intf):
+
+    ip  = get_intf_ip(uut,intf)
+    #import pdb;pdb.set_trace()
+    cfg1 = \
+    f"""
+    interface {intf}
+    no ipv4 address
+    no ipv6 en
+    vrf {vrf}
+    ip address {ip}/24
+    ipv6 en
+    no sh
+    """
+    uut.configure(cfg1)
+
+def peceOspfBgp(uut,intf,vrf):
+    cfg = \
+        f"""
+        no router ospf 100
+        router ospf 100
+        vrf {vrf}
+        redistribute bgp 65001
+        area 0
+        interface {intf}
+        !
+        !
+    
+        router bgp 65001
+        address-family ipv4 unicast
+        !
+        vrf {vrf}
+        rd 65001:1
+        address-family ipv4 unicast
+        redistribute connected
+        redistribute ospf 100
+        !
+    
+        """
+    uut.configure(cfg)
+
+def addL3VpnService(uut,vrf,intf,RT):
+    vrfConfigXr(uut,vrf,RT)
+    vrfIntfConfigXr(uut,vrf,intf)
+    peceOspfBgp(uut,intf,vrf)
+
+
+def addBgpUmplsxr(uut,nei_list):
+    neigh_ip_list = []
+    for uut1 in nei_list:
+        ip = get_intf_ip(uut1,'Loopback0')
+        neigh_ip_list.append(ip)
+    nwk  = get_intf_ip(uut,'Loopback0')+"/32"
+    AS1 = '65001'
+    cmdxr =\
+        f"""
+        router bgp {AS1}
+        ibgp policy out enforce-modifications
+        address-family ipv4 unicast
+        network {nwk}
+        allocate-label all
+        !
+        af-group IPV4_LUCAST_CLIENT address-family ipv4 labeled-unicast
+        """
+    if not "PE" in uut.name: 
+        cmdxr += ' route-reflector-client \n'   
+        cmdxr += ' next-hop-self \n'   
+    cmdxr += 'session-group IBGP_SESSION \n' 
+    cmdxr += f'remote-as {AS1} \n' 
+    cmdxr += 'update-source Loopback0 \n' 
+  
+    for neigh in neigh_ip_list:
+        cmdxr += f' neighbor {neigh} \n'
+        cmdxr += ' use session-group IBGP_SESSION \n'
+        cmdxr += ' address-family ipv4 labeled-unicast \n'
+        cmdxr += ' use af-group IPV4_LUCAST_CLIENT \n'
+    
+    uut.configure(cmdxr)
+
+
+def addBgpVpnv4xr(uut,nei_list):
+    neigh_ip_list = []
+    for uut1 in nei_list:
+        ip = get_intf_ip(uut1,'Loopback0')
+        neigh_ip_list.append(ip)
+    nwk  = get_intf_ip(uut,'Loopback0')+"/32"
+    AS1 = '65001'
+    cmdxr =\
+        f"""
+        router bgp {AS1}
+        address-family vpnv4 unicast
+        !
+        """
+      
+ 
+    for neigh in neigh_ip_list:
+        cmdxr += f' neighbor {neigh} \n'
+        cmdxr += f'remote-as {AS1} \n' 
+        cmdxr += 'update-source Loopback0 \n' 
+        cmdxr += 'address-family vpnv4 unicast \n'
+    
+    uut.configure(cmdxr)
+
+
 def mplsldpAutoconfig(uut):
     op = uut.execute("show interf desc")
     cmdxe =\
@@ -251,25 +379,113 @@ def configure_isis(uut,conf_dict):
                         cmdxe += 'isis circuit-type level-1  \n' 
                 uut.configure(cmdxe.format(net=net))    
  
+
+
+ 
+
+def configureIsis(uut,conf_dict):
+ 
+    cmdxe = \
+    """
+    ipv6 unicast-routing 
+    no router isis 100
+    router isis 100
+    net {net}
+    advertise passive-only
+    metric-style wide
+    no hello padding
+    log-adjacency-changes all
+    passive-interface Loopback0
+    address-family ipv6
+    advertise passive-only
+  
+    """
+    node_list = conf_dict['protocols']['isis']
+    for key in conf_dict['protocols']['isis'].keys():
+        host_name = key
+        for key2 in conf_dict['protocols']['isis'][key].keys():
+            proc_id = key2
+            net = conf_dict['protocols']['isis'][key][key2]['net']
+            cmdxr = \
+                f"""
+                no router isis {proc_id}
+                router isis {proc_id}
+                net {net}
+                log adjacency changes
+                log pdu drops
+                address-family ipv4 unicast
+                metric-style wide
+                advertise passive-only
+                address-family ipv6 unicast
+                metric-style wide
+                advertise passive-only
+                interface Loopback0
+                passive
+                address-family ipv4 unicast
+                address-family ipv6 unicast
+                exit
+                exit
+                """
+            if uut.name == host_name:
+                if uut.os == 'iosxr':
+                #cmd += 'net {net} \n'.format(net=net)
+                    if 'level-2' in conf_dict['protocols']['isis'][key][key2]['interfaces'].keys():
+                        l2_intf_list = conf_dict['protocols']['isis'][key][key2]['interfaces']['level-2']
+                        for intf in l2_intf_list:
+                            cmdxr += 'interface {intf} \n'.format(intf=intf)
+                            cmdxr += 'address-family ipv4 unicast \n'
+                            cmdxr += 'address-family ipv6 unicast \n' 
+                            cmdxr += 'circuit-type level-2-only \n' 
+
+                    if 'level-1' in conf_dict['protocols']['isis'][key][key2]['interfaces'].keys():
+                        l1_intf_list = conf_dict['protocols']['isis'][key][key2]['interfaces']['level-1']
+                        for intf in l1_intf_list:
+                            cmdxr += 'interface {intf} \n'.format(intf=intf)
+                            cmdxr += 'address-family ipv4 unicast \n'
+                            cmdxr += 'address-family ipv6 unicast \n' 
+                            cmdxr += 'circuit-type level-1 \n' 
+          
+                    uut.configure(cmdxr.format(net=net))            
+  
+            elif uut.os == 'iosxe':
+                if 'level-2' in conf_dict['protocols']['isis'][key]['interfaces'].keys():
+                    l2_intf_list = conf_dict['protocols']['isis'][key]['interfaces']['level-2']
+                    for intf in l2_intf_list:
+                        cmdxe += 'interface {intf} \n'.format(intf=intf)
+                        cmdxe += 'ip router isis 100 \n'
+                        cmdxe += 'isis circuit-type level-2  \n' 
+                if 'level-1' in conf_dict['protocols']['isis'][key]['interfaces'].keys():
+                    l1_intf_list = conf_dict['protocols']['isis'][key]['interfaces']['level-1']
+                    for intf in l1_intf_list:
+                        cmdxe += 'interface {intf} \n'.format(intf=intf)
+                        cmdxe += 'ip router isis 100 \n'
+                        cmdxe += 'isis circuit-type level-1  \n' 
+                uut.configure(cmdxe.format(net=net))    
+ 
   
 
-def configure_isis_new(uut,area,l1_uut_list):
+  
+
+def addIsis(uut,inst,area,intf_list):
 
   
     """
     A router has a Network Entity Title (NET) of 49.001a.1122.3344.5566.00. To what area does this router belong, and what is its system ID?
     The area is 49.001a. The router's system ID is 1122.3344.5566. The easiest way to figure this out is to start from the right and work towards the left. The last two numbers of the NET are the NSEL; they are always 00 on a router. The next 12 numbers (separated into 3 groups of 4 numbers) are the system ID. On Cisco routers, the system ID is always this length—6 bytes. Anything to the left of the system ID is the area ID.
     """
-
+    op2 = uut.execute("show run router isis")
+    for line in op2.splitlines():
+        if 'net' in line:
+            net = line.split()[1]
     #net = '49.0000.0000.0000.0012.00'
-
-    mac1 = str(RandMac("0000.0000.0000"))
-    net = area+"."+mac1+'.00'
+        else:    
+            mac1 = str(RandMac("0000.0000.0000"))
+            net = area+"."+mac1+'.00'
     cmdxr = \
-    """
-    no router isis 100
+    f"""
+    no router isis {inst}
 
-    router isis 100
+    router isis {inst}
     net {net}
     log adjacency changes
     log pdu drops
@@ -287,10 +503,10 @@ def configure_isis_new(uut,area,l1_uut_list):
     exit
     """
     cmdxe = \
-    """
+    f"""
     ipv6 unicast-routing 
-    no router isis 100
-    router isis 100
+    no router isis {inst}
+    router isis {inst}
     net {net}
     advertise passive-only
     metric-style wide
@@ -301,52 +517,25 @@ def configure_isis_new(uut,area,l1_uut_list):
     advertise passive-only
   
     """
-    l1_int_list = []
-    l2_int_list = []
-    op1 = uut.execute('show int desc | inc xrv')
-    #show int desc | inc xrv
-    #Wed May 26 12:21:05.634 UTC
-    #Gi0/0/0/0.108      up          up          xrv-8----xrv-9
-    #Gi0/0/0/0.128      up          up          xrv-7----xrv-9
-    #RP/0/0/CPU0:xrv-9#
-
-
+    int_list = intf_list
+    op1 = uut.execute('sho ip int br | ex una')
     
     for line in op1.splitlines():
-        if 'Gi' in line:
-            for uut1 in l1_uut_list:
-                if uut1.name in line:
-                    l1_int_list.append(line.split()[0])
-                else:    
-                    l2_int_list.append(line.split()[0])
-    
-    l1_int_list = list(set(l1_int_list))
-    l2_int_list = list(set(l2_int_list))
+        if 'Lo' in line:
+            int_list.append(line.split()[0])
+
+    int_list = list(set(int_list))
     if uut.os == 'iosxr':
-        for intf in l2_int_list:
-            cmdxr += 'interface {intf} \n'.format(intf=intf)
-            cmdxr += 'address-family ipv4 unicast \n'
-            cmdxr += 'address-family ipv6 unicast \n' 
-            cmdxr += 'circuit-type level-2-only \n' 
-        for intf in l1_int_list:
-            cmdxr += 'interface {intf} \n'.format(intf=intf)
-            cmdxr += 'address-family ipv4 unicast \n'
-            cmdxr += 'address-family ipv6 unicast \n' 
-            cmdxr += 'circuit-type level-1 \n' 
-          
-        uut.configure(cmdxr.format(net=net))            
+        for intf in int_list:
+            if not "Gi" in op2:
+                cmdxr += 'interface {intf} \n'.format(intf=intf)
+                cmdxr += 'address-family ipv4 unicast \n'
+                cmdxr += 'address-family ipv6 unicast \n' 
+                cmdxr += 'circuit-type level-2-only \n' 
+        
+    uut.configure(cmdxr)            
   
-    elif uut.os == 'iosxe':
-        for intf in l2_intf_list:
-            cmdxe += 'interface {intf} \n'.format(intf=intf)
-            cmdxe += 'ip router isis 100 \n'
-            cmdxe += 'isis circuit-type level-2  \n' 
-        for intf in l1_intf_list:
-            cmdxe += 'interface {intf} \n'.format(intf=intf)
-            cmdxe += 'ip router isis 100 \n'
-            cmdxe += 'isis circuit-type level-1  \n' 
-        uut.configure(cmdxe.format(net=net))    
- 
+   
   
 
 def configure_interfaces(uut,conf_dict):
@@ -405,6 +594,67 @@ def core_node():
 
 def agg_node():
     pass
+
+
+def bringUpDot1qIntf(uut1,nei_list):
+    #import pdb ; pdb.set_trace()
+    for uut in nei_list:
+        op1=uut1.execute('show cdp ne | incl {a}'.format(a=uut.name))
+        for line in op1.splitlines():
+            if uut.name in line:
+                if not '.' in line:
+                    a = random.randint(31,70)
+                    b = random.randint(31,70)
+                    encap = int(a+b)+random.randint(10,30)
+                    if encap > 200:
+                        encap = random.randint(25,199)
+                    if encap == 127:
+                        encap = encap + random.randint(25,50)
+                    intf_uut1 = line.split()[1] 
+                    intf_uut = line.split()[-1]
+                    intf_uut1=intf_uut1.strip('Cisco')
+                    intf_uut=intf_uut.strip('Cisco')
+                    c = random.randint(100,200)
+                    uut1_ip = str(encap)+"."+str(encap)+"."+str(c)+".1"
+                    uut_ip = str(encap)+"."+str(encap)+"."+str(c)+".2"
+                    description = uut1.name+"----"+uut.name
+                    configure_subintf(uut1,intf_uut1,encap,uut1_ip,description)
+                    configure_subintf(uut,intf_uut,encap,uut_ip,description)
+
+def bringUpL3Link(uut1,nei_list):
+    #import pdb ; pdb.set_trace()
+    for uut in nei_list:
+        op1=uut1.execute('show cdp ne | incl {a}'.format(a=uut.name))
+        for line in op1.splitlines():
+            if uut.name in line:
+                if not '.' in line:
+                    a = random.randint(31,100)
+                    b = random.randint(101,200)
+                    #encap = int(a+b)+random.randint(10,30)
+                    #if encap > 200:
+                    encap = random.randint(10,199)
+                    if encap == 127:
+                        encap = encap + random.randint(25,50)
+                    intf_uut1 = line.split()[1] 
+                    intf_uut = line.split()[-1]
+                    intf_uut1=intf_uut1.strip('Cisco')
+                    intf_uut=intf_uut.strip('Cisco')
+                    c = random.randint(100,200)
+                    uut1_ip = str(encap)+"."+str(encap)+"."+str(c)+".1"
+                    uut_ip = str(encap)+"."+str(encap)+"."+str(c)+".2"
+                    description = uut1.name+"----"+uut.name
+                    configureL3intf(uut1,intf_uut1,uut1_ip,description)
+                    configureL3intf(uut,intf_uut,uut_ip,description)
+
+
+
+
+
+
+
+
+
+
 
 def bring_up_subif4(uut1,nei_list):
     #import pdb ; pdb.set_trace()
@@ -880,6 +1130,31 @@ def get_igp_intf_list(uut):
                             intf_list.append(line.split()[0])
     return intf_list
 
+def getInterfacList(uut):
+    intf_list = []
+    op1 = uut.execute('sh ip int br | ex unass')
+    for line in op1.splitlines():
+        if line:
+            if "Lo" in line:
+                intf_list.append(line.split()[0])
+            elif "Gi" in line:
+                intf_list.append(line.split()[0])                
+    return intf_list
+
+def addOspfXr(uut):
+    rid = get_intf_ip(uut,"Loop0")
+    intf_list = getInterfacList(uut)
+    cfg = \
+    f"""
+    router ospf 100
+    router-id {rid}
+    are 0
+    """
+    for intf in intf_list:
+         cfg += f'interface {intf}\n'
+   
+    uut.configure(cfg)
+
 def get_intf_ip(uut,intf):
     for line in uut.execute('show run interface {intf}'.format(intf=intf)).splitlines():
         if line:
@@ -898,6 +1173,34 @@ def get_intf_ip(uut,intf):
 #        if not 'oopback' in intf:
 #            intf_list2.append(intf)
 #            Genie.config_mpls_ldp_on_interface(uut,intf)
+
+
+def configureSRxr(uut,igp_inst,index):
+    cfg = \
+    f"""        
+    router isis {igp_inst}
+    address-family ipv4 unicast
+    segment-routing mpls
+    segment-routing mpls sr-prefer
+
+    !
+    interface Loopback0
+    address-family ipv4 unicast
+    prefix-sid index {index}
+    !
+    """
+
+    uut.configure(cfg)
+
+def removeLdp(uut,igp_inst):
+    cfg = \
+    f"""        
+    router isis {igp_inst}
+    address-family ipv4 unicast
+    no  mpls ldp auto-config
+    """
+    uut.configure(cfg)
+
 
 def add_mpls_interface_config(uut):
     intf_list = get_igp_intf_list(uut)
@@ -1139,6 +1442,19 @@ f35e7f        n9        0,1                 R10          test1_iosv.virl
 """
 
 
+def configureL3intf(uut,intf,ip_add,description):
+    cfg = \
+    f"""
+    interface {intf}
+    description {description}
+    ip address {ip_add} 255.255.255.0
+    ipv6 enable
+    no shut
+    """
+    try:
+        uut.configure(cfg)
+    except:
+        logger.info(f'Failed configure_subintf device @ {uut.name}')
 
 def configure_subintf(uut,intf,dot1q,ip_add,description):
     cfg = \
@@ -1515,7 +1831,7 @@ def bring_up_subif3(uut1,nei_list):
 
  
 def bring_up_subif2(uut1,nei_list):
-    pdb.set_trace()
+    #pdb.set_trace()
     for uut in nei_list:
         op1=uut1.execute('show cdp ne | incl {a}'.format(a=uut.name))
         if 'xr' in uut1.name:
@@ -1709,6 +2025,10 @@ def add_ospf(uut):
  cmd += 'router ospf {id}' 
  cmd += 'router-id  {rid}' 
  
+
+ 
+
+
 def add_bgp_vxlan(uut,conf_dict): 
  
     cfg_bgp = \
