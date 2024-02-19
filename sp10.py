@@ -141,9 +141,16 @@ class CommonSetup(aetest.CommonSetup):
         #pcall(add_mpls_conf,uut=tuple(core_uut_list))
 
         #pcall(add_mpls_interface_config,uut=tuple(xr_uut_list))
+<<<<<<< HEAD
         pcall(copy_run_start,uut=tuple(xe_uut_list))
 
 
+=======
+        # pcall(copy_run_start,uut=tuple(xr_uut_list)) 
+ 
+
+ 
+>>>>>>> a7c04b8bb5dce427b1aa358b2bfcb3a15aacc289
 if __name__ == "__main__":
     # if this script is run stand-alone
     import os
