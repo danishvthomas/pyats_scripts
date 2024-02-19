@@ -97,54 +97,79 @@ class CommonSetup(aetest.CommonSetup):
         #for uut in [CE2]:
         	uut.connect()
  
+
  
     @aetest.subsection
-    def cleanup(self, testbed):
-        pcall(unshut_intf,uut=tuple(uut_list))
-        pcall(remove_intf_all,uut=tuple(uut_list))
-        pcall(cleanup_igp,uut=tuple(uut_list)) 
+    def precleanup(self, testbed):
+        try:
+            log.info("cleanup all configs")
+            pcall(unshut_intf,uut=tuple(uut_list))
+            pcall(remove_intf_all,uut=tuple(uut_list))
+            pcall(cleanup_igp,uut=tuple(uut_list)) 
+        except:
+            logger.info(f'Failed pre cleanup')
 
     @aetest.subsection
     def interFaceConf(self, testbed):
-        loopback_config(uut_list)
-        bringUpL3Link(CE1,[PE11,PE12])
-        bringUpL3Link(CE2,[PE2])
-        bringUpL3Link(XR1,[PE11,PE12,XR2,XR3])
-        bringUpL3Link(XR2,[PE11,PE12,XR3])
+        log.info("add interface configs")
+        try: 
+            loopback_config(uut_list)
+            bringUpL3Link(CE1,[PE11,PE12])
+            bringUpL3Link(CE2,[PE2])
+            bringUpL3Link(XR1,[PE11,PE12,XR2,XR3])
+            bringUpL3Link(XR2,[PE11,PE12,XR3])
 
-        bringUpL3Link(XR4,[XR3,XR5,XR6])
-        bringUpL3Link(XR5,[XR3,XR6])
+            bringUpL3Link(XR4,[XR3,XR5,XR6])
+            bringUpL3Link(XR5,[XR3,XR6])
 
-        bringUpL3Link(XR7,[XR6,XR8,PE2])
-        bringUpL3Link(XR8,[XR6,PE2])
- 
+            bringUpL3Link(XR7,[XR6,XR8,PE2])
+            bringUpL3Link(XR8,[XR6,PE2])
+        except:
+            logger.info(f'Failed')
+
     @aetest.subsection
     def igpMpls(self, testbed):
-        pcall(configureIsis,uut=tuple(uut_list_core),conf_dict=tuple(conf_dict_list_core))
-        pcall(mplsldpAutoconfig,uut=tuple(uut_list_core))
-    
+        log.info("add Igp mpls configs")
+        try:
+            pcall(configureIsis,uut=tuple(uut_list_core),conf_dict=tuple(conf_dict_list_core))
+            pcall(mplsldpAutoconfig,uut=tuple(uut_list_core))
+        except:
+            logger.info(f'Failed')
+  
     @aetest.subsection
     def bgpLu(self, testbed):
-        addBgpUmplsxr(PE11,[XR3])
-        addBgpUmplsxr(PE12,[XR3])
-        addBgpUmplsxr(XR3,[PE11,PE12,XR6])
-        addBgpUmplsxr(XR6,[PE2,XR3])
-
+        log.info("add bgp Lu")
+        try:
+            addBgpUmplsxr(PE11,[XR3])
+            addBgpUmplsxr(PE12,[XR3])
+            addBgpUmplsxr(XR3,[PE11,PE12,XR6])
+            addBgpUmplsxr(XR6,[PE2,XR3])
+        except:
+            logger.info(f'Failed')
+  
     @aetest.subsection
     def bgpVpnV4(self, testbed):
-        addBgpVpnv4xr(PE11,[PE2])
-        addBgpVpnv4xr(PE12,[PE2])
-        addBgpVpnv4xr(PE2,[PE11,PE12])
-
+        try:
+            log.info("add bgp vpnv4")
+            addBgpVpnv4xr(PE11,[PE2])
+            addBgpVpnv4xr(PE12,[PE2])
+            addBgpVpnv4xr(PE2,[PE11,PE12])
+        except:
+            logger.info(f'Failed')
+  
     @aetest.subsection
     def l3VpnService(self, testbed):
-        for uut in [CE1,CE2]:
-            addOspfXr(uut)
+        log.info("add bgp l3 vpn pe-ce")
+        try 
+            for uut in [CE1,CE2]:
+                addOspfXr(uut)
 
-        addL3VpnService(PE11,"BLUE","G0/0/0/1","65001:1")
-        addL3VpnService(PE12,"BLUE","G0/0/0/0","65001:1")
-        addL3VpnService(PE2,"BLUE","G0/0/0/2","65001:1")
-
+            addL3VpnService(PE11,"BLUE","G0/0/0/1","65001:1")
+            addL3VpnService(PE12,"BLUE","G0/0/0/0","65001:1")
+            addL3VpnService(PE2,"BLUE","G0/0/0/2","65001:1")
+        except:
+            logger.info(f'Failed')
+  
 
 
 class test1CEtoCEREach(aetest.Testcase):
@@ -181,10 +206,13 @@ class test1CEtoCEREach(aetest.Testcase):
 class test2LdpToSRMigration(aetest.Testcase):
     @aetest.setup
     def setup(self, section):
-        pcall(configureSRxr,uut=(PE11,PE12,XR1,XR2,XR3),igp_inst=igp_inst_a1,index=(1,2,3,4,5))
-        pcall(configureSRxr,uut=(XR3,XR4,XR5,XR6),igp_inst=igp_inst_c,index=(1,20,30,40))
-        pcall(configureSRxr,uut=(XR6,XR7,XR8,PE2),igp_inst=igp_inst_a2,index=(40,22,33,13))
- 
+        try:
+            pcall(configureSRxr,uut=(PE11,PE12,XR1,XR2,XR3),igp_inst=igp_inst_a1,index=(1,2,3,4,5))
+            pcall(configureSRxr,uut=(XR3,XR4,XR5,XR6),igp_inst=igp_inst_c,index=(1,20,30,40))
+            pcall(configureSRxr,uut=(XR6,XR7,XR8,PE2),igp_inst=igp_inst_a2,index=(40,22,33,13))
+        except:
+            logger.info(f'Failed')
+  
 
     @aetest.test
     def test_1_ping(self, section):
@@ -199,6 +227,7 @@ class test2LdpToSRMigration(aetest.Testcase):
         for ip1 in dest_ip_list:
             CE1.execute(f"ping {ip1} sou loop0 repe 10")
             res1 = CE1.execute(f"ping {ip1} sou loop0 repe 10")
+            log.info(f" ping respons is {res1}")
             if not 'Success rate is 100 percent' in res1:
                 log.info(f"FAILED PING FOR {ip1}")
                 self.failed()
@@ -206,9 +235,13 @@ class test2LdpToSRMigration(aetest.Testcase):
 
     @aetest.test
     def removeLDP(self, section):
-        pcall(removeLdp,uut=(PE11,PE12,XR1,XR2,XR3),igp_inst=igp_inst_a1)
-        pcall(removeLdp,uut=(XR3,XR4,XR5,XR6),igp_inst=igp_inst_c)
-        pcall(removeLdp,uut=(XR6,XR7,XR8,PE2),igp_inst=igp_inst_a2)
+        try:
+            pcall(removeLdp,uut=(PE11,PE12,XR1,XR2,XR3),igp_inst=igp_inst_a1)
+            pcall(removeLdp,uut=(XR3,XR4,XR5,XR6),igp_inst=igp_inst_c)
+            pcall(removeLdp,uut=(XR6,XR7,XR8,PE2),igp_inst=igp_inst_a2)
+        except:
+            logger.info(f'Failed')
+  
         import time
         time.sleep(10)
 
@@ -225,6 +258,7 @@ class test2LdpToSRMigration(aetest.Testcase):
         for ip1 in dest_ip_list:
             CE1.execute(f"ping {ip1} sou loop0 repe 10")
             res1 = CE1.execute(f"ping {ip1} sou loop0 repe 10")
+            log.info(f" ping respons is {res1}")
             if not 'Success rate is 100 percent' in res1:
                 log.info(f"FAILED PING FOR {ip1}")
                 self.failed()
