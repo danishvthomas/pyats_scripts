@@ -13,7 +13,7 @@ import random
 import genie
 from genie.libs.conf.ospf import Ospf
 from igp_lib import *
-
+import time
 from genie.conf.base import Testbed, Device, Link, Interface
 
 # Python
@@ -97,7 +97,6 @@ class CommonSetup(aetest.CommonSetup):
         #for uut in [CE2]:
         	uut.connect()
  
-
  
     @aetest.subsection
     def precleanup(self, testbed):
@@ -108,7 +107,7 @@ class CommonSetup(aetest.CommonSetup):
             pcall(cleanup_igp,uut=tuple(uut_list)) 
         except:
             logger.info(f'Failed pre cleanup')
-
+        time.sleep(30)   
     @aetest.subsection
     def interFaceConf(self, testbed):
         log.info("add interface configs")
@@ -126,16 +125,23 @@ class CommonSetup(aetest.CommonSetup):
             bringUpL3Link(XR8,[XR6,PE2])
         except:
             logger.info(f'Failed')
+        time.sleep(30)   
 
+ 
     @aetest.subsection
     def igpMpls(self, testbed):
         log.info("add Igp mpls configs")
         try:
+            #pcall(removeSRxr,uut=(PE11,PE12,XR1,XR2,XR3),igp_inst=igp_inst_a1,index=(1,2,3,4,5))
+            #pcall(removeSRxr,uut=(XR3,XR4,XR5,XR6),igp_inst=igp_inst_c,index=(1,20,30,40))
+            #pcall(removeSRxr,uut=(XR6,XR7,XR8,PE2),igp_inst=igp_inst_a2,index=(40,22,33,13))
+
             pcall(configureIsis,uut=tuple(uut_list_core),conf_dict=tuple(conf_dict_list_core))
             pcall(mplsldpAutoconfig,uut=tuple(uut_list_core))
         except:
             logger.info(f'Failed')
-  
+        time.sleep(3)  
+     
     @aetest.subsection
     def bgpLu(self, testbed):
         log.info("add bgp Lu")
@@ -144,9 +150,10 @@ class CommonSetup(aetest.CommonSetup):
             addBgpUmplsxr(PE12,[XR3])
             addBgpUmplsxr(XR3,[PE11,PE12,XR6])
             addBgpUmplsxr(XR6,[PE2,XR3])
+            addBgpUmplsxr(PE2,[XR6])
         except:
             logger.info(f'Failed')
-  
+        time.sleep(3)     
     @aetest.subsection
     def bgpVpnV4(self, testbed):
         try:
@@ -156,11 +163,11 @@ class CommonSetup(aetest.CommonSetup):
             addBgpVpnv4xr(PE2,[PE11,PE12])
         except:
             logger.info(f'Failed')
-  
+        time.sleep(3)    
     @aetest.subsection
     def l3VpnService(self, testbed):
         log.info("add bgp l3 vpn pe-ce")
-        try 
+        try: 
             for uut in [CE1,CE2]:
                 addOspfXr(uut)
 
@@ -170,13 +177,13 @@ class CommonSetup(aetest.CommonSetup):
         except:
             logger.info(f'Failed')
   
-
-
+        time.sleep(3)   
+ 
 class test1CEtoCEREach(aetest.Testcase):
     @aetest.setup
     def setup(self, section):
         pass
-
+        time.sleep(3)   
     @aetest.test
     def test_1(self, section):
         dest_ip_list = []
@@ -201,8 +208,7 @@ class test1CEtoCEREach(aetest.Testcase):
         pass 
         log.info("%s testcase cleanup/teardown" % self.uid)           
  
-
-
+ 
 class test2LdpToSRMigration(aetest.Testcase):
     @aetest.setup
     def setup(self, section):
@@ -213,7 +219,7 @@ class test2LdpToSRMigration(aetest.Testcase):
         except:
             logger.info(f'Failed')
   
-
+        time.sleep(30)   
     @aetest.test
     def test_1_ping(self, section):
         dest_ip_list = []
@@ -241,10 +247,8 @@ class test2LdpToSRMigration(aetest.Testcase):
             pcall(removeLdp,uut=(XR6,XR7,XR8,PE2),igp_inst=igp_inst_a2)
         except:
             logger.info(f'Failed')
-  
-        import time
-        time.sleep(10)
-
+ 
+        time.sleep(30)   
     @aetest.test
     def test_2_ping(self, section):
         dest_ip_list = []

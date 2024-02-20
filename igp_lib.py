@@ -1192,6 +1192,24 @@ def configureSRxr(uut,igp_inst,index):
 
     uut.configure(cfg)
 
+
+def removeSRxr(uut,igp_inst,index):
+    cfg = \
+    f"""        
+    router isis {igp_inst}
+    address-family ipv4 unicast
+    no segment-routing mpls
+    no segment-routing mpls sr-prefer
+
+    !
+    interface Loopback0
+    address-family ipv4 unicast
+    no prefix-sid index {index}
+    !
+    """
+
+    uut.configure(cfg)
+
 def removeLdp(uut,igp_inst):
     cfg = \
     f"""        
