@@ -1,0 +1,316 @@
+ethernet:
+  CE1:
+    interfaces:         
+      Loopback0:
+        type : l3
+        ip_add : 199.1.1.1 255.255.255.255
+        ipv6_add : 2001:199:199:11:11::11/128
+ 
+      GigabitEthernet0/0/0/0:
+        description : pe12
+        type : l3
+        ip_add : 11.1.0.1 255.255.255.0  
+
+      GigabitEthernet0/0/0/1:
+        description : pe11
+        type : l3
+        ip_add : 11.1.1.1 255.255.255.0  
+  CE2:
+    interfaces:         
+      Loopback0:
+        type : l3
+        ip_add : 199.1.1.2 255.255.255.255
+        ipv6_add : 2001:199:199:11:11::22/128
+
+      GigabitEthernet0/0/0/2:
+        description : pe2
+        type : l3
+        ip_add : 22.1.1.2 255.255.255.0  
+
+  PE11:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 1.1.1.11 255.255.255.255
+        ipv6_add : 2001:1:1:1:1::11/128
+
+      Loopback1:
+        type : l3
+        ip_add : 1.1.1.111 255.255.255.255
+        ipv6_add : 2001:1:1:1:1::111/128
+
+
+      GigabitEthernet0/0/0/0:
+        description : XR1
+        type : l3
+        ip_add : 11.1.100.50 255.255.255.0  
+
+      GigabitEthernet0/0/0/1:
+        description : ce11
+        type : l3
+        ip_add : 11.1.1.11 255.255.255.0  
+
+      GigabitEthernet0/0/0/3:
+        description : XR2
+        type : l3
+        ip_add : 11.2.1.11 255.255.255.0  
+
+  PE112:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 1.1.1.12 255.255.255.255
+        ipv6_add : 2001:1:1:1:1::12/128
+
+      Loopback1:
+        type : l3
+        ip_add : 1.1.1.112 255.255.255.255
+        ipv6_add : 2001:1:1:1:1::112/128
+
+
+      GigabitEthernet0/0/0/0:
+        description : ce1
+        type : l3
+        ip_add : 11.1.0.12 255.255.255.0  
+
+      GigabitEthernet0/0/0/3:
+        description : XR1
+        type : l3
+        ip_add : 12.1.1.12 255.255.255.0  
+
+      GigabitEthernet0/0/0/4:
+        description : XR2
+        type : l3
+        ip_add : 12.2.1.12 255.255.255.0  
+
+  PE2:
+    interfaces:          
+      Loopback0:
+        type : l3
+        ip_add : 1.1.1.2 255.255.255.255
+        ipv6_add : 2001:1:1:1:1::2/128
+
+      Loopback1:
+        type : l3
+        ip_add : 1.1.1.22 255.255.255.255
+        ipv6_add : 2001:1:1:1:1::22/128
+
+
+      GigabitEthernet0/0/0/2:
+        description : ce2
+        type : l3
+        ip_add : 22.1.2.22 255.255.255.0  
+
+      GigabitEthernet0/0/0/0:
+        description : XR7
+        type : l3
+        ip_add : 22.7.1.2 255.255.255.0  
+
+      GigabitEthernet0/0/0/0:
+        description : XR8
+        type : l3
+        ip_add : 22.8.1.2 255.255.255.0  
+
+ 
+protocols:
+    isis:
+        xr9kpe1:
+          CORE1:  
+            net: '49.0001.0000.0000.0311.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/0','Gi0/0/0/1']
+
+        xrv0:
+          CORE1:  
+            net: '49.0001.0000.0000.0002.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/0','Gi0/0/0/1','Gi0/0/0/2']
+
+        xrv1:
+          CORE1:  
+            net: '49.0001.0000.0000.0003.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/0','Gi0/0/0/1','Gi0/0/0/2']
+
+
+        xrv2:
+          CORE1:  
+            net: '49.0001.0000.0000.0004.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/0','Gi0/0/0/3','Gi0/0/0/2']
+
+
+        xrv3:
+          CORE1:  
+            net: '49.0001.0000.0000.0005.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/1','Gi0/0/0/4','Gi0/0/0/2']
+
+        xr9k2:
+          CORE1:  
+            net: '49.0002.0000.0000.0022.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/3','Gi0/0/0/4']
+
+          CORE2:  
+            net: '49.0002.0000.0000.0022.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/1','Gi0/0/0/0','Gi0/0/0/2']
+
+        xrv4:
+          CORE2:  
+            net: '49.0002.0000.0000.0024.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/0','Gi0/0/0/4','Gi0/0/0/2']
+
+        xrv5:
+          CORE2:  
+            net: '49.0002.0000.0000.0025.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/1','Gi0/0/0/5','Gi0/0/0/2']
+
+        xr9k4:
+          CORE2:  
+            net: '49.0003.0000.0000.0044.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/3','Gi0/0/0/4','Gi0/0/0/5']
+
+          CORE3:  
+            net: '49.0003.0000.0000.0044.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/1','Gi0/0/0/0','Gi0/0/0/6']
+
+        xrv6:
+          CORE3:  
+            net: '49.0003.0000.0000.0036.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/1','Gi0/0/0/0','Gi0/0/0/2','Gi0/0/0/3','Gi0/0/0/6']
+
+        xrv7:
+          CORE3:  
+            net: '49.0003.0000.0000.0037.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/1','Gi0/0/0/0','Gi0/0/0/2','Gi0/0/0/3']
+
+        xr9kpe2:
+          CORE3:  
+            net: '49.0003.0000.0000.0032.00'
+            interfaces:
+              level-2:
+                ['Gi0/0/0/0','Gi0/0/0/1','Gi0/0/0/2']
+
+    ospf:
+        iosv-0:
+          rid: '1.1.1.1'
+          area:
+            2:
+              interfaces: 
+                [loop0,loop10,GigabitEthernet0/0.100,GigabitEthernet0/0.101]    
+              type:
+                standard
+ 
+
+    bgp:
+        nxos9000-0 :
+          as: 
+            100
+          networks: 
+            [loopback]    
+          neighbor:
+            2.2.2.1
+          remote-as:
+            100
+          rid:
+            1.1.1.1
+        nxos9000-1 :
+          as: 
+            100
+          networks: 
+            [loopback]    
+          neighbor:
+            1.1.1.1
+          remote-as:
+            100
+          rid:
+            2.2.2.1
+              
+        nxos9000-2 :
+          as: 
+            200
+          networks: 
+            [loopback]    
+          neighbor:
+            4.4.4.1
+          remote-as:
+            200
+          rid:
+            3.3.3.1
+        nxos9000-3 :
+          as: 
+            200
+          networks: 
+            [loopback]    
+          neighbor:
+            3.3.3.1
+          remote-as:
+            200
+          rid:
+            4.4.4.1
+    pim:
+        nxos9000-0 :
+          rp_add: 
+            5.5.5.1
+        nxos9000-1 :
+          rp_add: 
+            5.5.5.1
+        nxos9000-2 :
+          rp_add: 
+            6.6.6.1
+        nxos9000-3 :
+          rp_add: 
+            6.6.6.1
+ 
+        iosv-0:
+          rp_add: 
+            5.5.5.1
+ 
+        iosv-1:
+          rp_add: 
+            6.6.6.1
+    ebgp:
+        nxos9000-1 :
+          as: 
+            100
+          networks: 
+            [loopback]    
+          neighbor:
+            15.15.1.2
+          remote-as:
+            200
+          update-source:
+            Ethernet1/5
+              
+        nxos9000-2 :
+          as: 
+            200
+          networks: 
+            [loopback]    
+          neighbor:
+            15.15.1.1
+          remote-as:
+            100
+          update-source:
+            Ethernet1/5

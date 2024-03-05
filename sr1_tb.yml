@@ -1,0 +1,166 @@
+#n0        0,1             core1xe              unifiedMPLS
+#n1      0,1,2              abr2xr              unifiedMPLS
+ 
+#n2      0,1,2              abr1xr              unifiedMPLS
+#n3        0,1              abr3xe              unifiedMPLS
+#n4        0,1             agg2xe              unifiedMPLS
+#n5      0,1,2             agg1xr              unifiedMPLS
+#n6        0,1             agg3xe              unifiedMPLS
+#n7      0,1,2               pe2xr              unifiedMPLS
+#n8      0,1,2               pe1xr              unifiedMPLS
+#n9        0,1               pe3xe              unifiedMPLS
+
+devices:
+  jumphost:
+    os: linux
+    type: linux
+    connections:
+      cli:
+        protocol: ssh
+        #ip: 172.16.87.128
+        ip: 192.168.68.50
+    credentials:
+        default:                         # login credentials
+            username: admin
+            password: nbv12345
+
+
+  xr9k0:
+    os: iosxr
+    type: router
+    alias: xr9k0
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /sr2/xr9k0/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+
+ 
+ 
+  xr9k1:
+    os: iosxr
+    type: router
+    alias: xr9k1
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /sr2/xr9k1/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+ 
+ 
+  xrv60:
+    os: iosxr
+    type: router
+    alias: xrv60
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /sr2/xrv60/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+
+  xrv61:
+    os: iosxr
+    type: router
+    alias: xrv61
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /sr2/xrv61/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+
+  
+  xrv62:
+    os: iosxr
+    type: router
+    alias: xrv62
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /sr2/xrv62/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+
+  xrv63:
+    os: iosxr
+    type: router
+    alias: xrv63
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /sr2/xrv63/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+
+  ce1:
+    os: iosxe
+    type: router
+    alias: ce1
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /sr2/ce1/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
+
+  ce2:
+    os: iosxe
+    type: router
+    alias: ce2
+    connections:
+      defaults:
+        class: unicon.Unicon
+      cli:
+        command: open /sr2/ce2/0
+        proxy: jumphost
+    credentials:
+      enable:
+        password: cisco
+      default:
+        password: cisco
+        username: cisco 
